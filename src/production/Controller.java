@@ -51,10 +51,10 @@ public class Controller implements Initializable {
 
   @FXML
   void pushButton1() {
-    initializeDB();
     addProduct.setOnAction(
         e -> {
           try {
+            initializeDB();
             String sql = "INSERT INTO Product (TYPE, MANUFACTURER, NAME) VALUES ('Audio', ?, ?)";
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, manufacturerName.getText());
@@ -63,6 +63,7 @@ public class Controller implements Initializable {
           } catch (SQLException ex) {
             ex.printStackTrace();
           }
+          System.out.println("Hello");
         });
   }
 
