@@ -40,15 +40,15 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
           </rowConstraints>
           <Label text="Product Name"/>
-          <TextField fx:id="productName" promptText="Enter product name"
-            GridPane.columnIndex="1"/>
+          <TextField fx:id="productName" promptText="Enter product name" GridPane.columnIndex="1"/>
           <TextField fx:id="manufacturerName" promptText="Enter manufacturer name"
             GridPane.columnIndex="1" GridPane.rowIndex="1"/>
           <Label text="Manufacturer" GridPane.rowIndex="1"/>
           <Label text="Item Type" GridPane.rowIndex="2"/>
           <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
         </GridPane>
-        <TableView layoutX="10.0" layoutY="160.0" prefHeight="300.0" prefWidth="530.0">
+        <TableView fx:id="viewProducts" layoutX="10.0" layoutY="160.0" prefHeight="300.0"
+          prefWidth="530.0">
           <columns>
             <TableColumn prefWidth="75.0" text="C1"/>
             <TableColumn prefWidth="75.0" text="C2"/>
@@ -63,7 +63,7 @@
         <Label layoutX="233.0" layoutY="14.0" text="Choose Product"/>
         <ListView layoutX="10.0" layoutY="34.0" prefHeight="300.0" prefWidth="530.0"/>
         <Label layoutX="37.0" layoutY="373.0" text="Choose Quantity"/>
-        <ComboBox layoutX="165.0" layoutY="369.0" prefWidth="150.0"/>
+        <ComboBox fx:id="quantityBox" layoutX="165.0" layoutY="369.0" prefWidth="150.0"/>
       </AnchorPane>
     </Tab>
     <Tab text="Production Log">

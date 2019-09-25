@@ -1,15 +1,23 @@
 package ProductionLine;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class Controller {
+public class Controller implements Initializable {
 
   private static final String JDBC_DRIVER = "org.h2.Driver";
   private static final String DB_URL = "jdbc:h2:./production_resources/production";
@@ -36,6 +44,8 @@ public class Controller {
   @FXML private TableView<?> viewProducts;
 
   @FXML private Button recordProduction;
+
+  @FXML private ComboBox<?> quantityBox;
 
   @FXML private Button productionLogButton;
 
@@ -64,5 +74,17 @@ public class Controller {
   @FXML
   void pushButton3() {
     System.out.println("Button 3 pressed");
+  }
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    List<Integer> list = new ArrayList<>();
+    for (int i = 1; i <= 10; i++) {
+      list.add(i);
+    }
+    ObservableList obList = FXCollections.observableList(list);
+    quantityBox.getItems().clear();
+    quantityBox.setItems(obList);
+    quantityBox.getSelectionModel().selectFirst();
   }
 }
