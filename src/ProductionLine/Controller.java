@@ -47,8 +47,8 @@ public class Controller {
           try {
             String sql = "INSERT INTO Product (TYPE, MANUFACTURER, NAME) VALUES ('Audio', ?, ?)";
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, productName.getText());
-            preparedStatement.setString(2, manufacturerName.getText());
+            preparedStatement.setString(1, manufacturerName.getText());
+            preparedStatement.setString(2, productName.getText());
             preparedStatement.executeUpdate();
           } catch (SQLException ex) {
             ex.printStackTrace();

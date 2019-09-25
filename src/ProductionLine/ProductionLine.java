@@ -10,7 +10,7 @@ public class ProductionLine extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception {
     Parent root = FXMLLoader.load(getClass().getResource("production_line.fxml"));
-    primaryStage.setTitle("ASSET-DEX");
+    primaryStage.setTitle("Product Tracking System");
     primaryStage.setScene(new Scene(root, 550, 500));
     primaryStage.show();
   }
