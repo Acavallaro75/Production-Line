@@ -1,4 +1,4 @@
-package ProductionLine;
+package production;
 
 import java.net.URL;
 import java.sql.Connection;

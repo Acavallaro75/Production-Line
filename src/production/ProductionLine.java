@@ -1,4 +1,4 @@
-package ProductionLine;
+package production;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
