@@ -19,27 +19,3 @@ public class ProductionLine extends Application {
     launch(args);
   }
 }
-
-  /*
-
-  private void showData() {
-    String productName =
-    try {
-      String sql = "INSERT INTO Product(Type, Manufacturer, Name) VALUES " + tableName;
-      ResultSet rs = stmt.executeQuery(sql);
-      ResultSetMetaData rsmd = rs.getMetaData();
-      int numberOfColumns = rsmd.getColumnCount();
-      for (int i = 1; i <= numberOfColumns; i++) {
-        ta.appendText(rsmd.getColumnName(i) + "\t");
-      }
-      ta.appendText("\n");
-      while (rs.next()) {
-        for (int i = 1; i <= numberOfColumns; i++) {
-          ta.appendText(rs.getString(i) + "\t");
-        }
-        ta.appendText("\n");
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }*/

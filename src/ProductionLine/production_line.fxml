@@ -40,10 +40,10 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
           </rowConstraints>
           <Label text="Product Name"/>
-          <TextField fx:id="productName" onKeyTyped="#saveProduct" promptText="Enter product name"
+          <TextField fx:id="productName" promptText="Enter product name"
             GridPane.columnIndex="1"/>
-          <TextField fx:id="manufacturerName" onKeyTyped="#saveManufacturer"
-            promptText="Enter manufacturer name" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+          <TextField fx:id="manufacturerName" promptText="Enter manufacturer name"
+            GridPane.columnIndex="1" GridPane.rowIndex="1"/>
           <Label text="Manufacturer" GridPane.rowIndex="1"/>
           <Label text="Item Type" GridPane.rowIndex="2"/>
           <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>

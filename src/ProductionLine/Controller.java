@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class Controller {
@@ -15,8 +15,8 @@ public class Controller {
   private static final String DB_URL = "jdbc:h2:./production_resources/production";
   private static final String USER = "";
   private static final String PASS = "";
-  private Connection conn;
-  private PreparedStatement pstmt = null;
+  private static Connection conn;
+  private static PreparedStatement preparedStatement;
 
   private void initializeDB() {
     try {
@@ -33,6 +33,8 @@ public class Controller {
 
   @FXML private TextField manufacturerName;
 
+  @FXML private TableView<?> viewProducts;
+
   @FXML private Button recordProduction;
 
   @FXML private Button productionLogButton;
@@ -44,10 +46,10 @@ public class Controller {
         e -> {
           try {
             String sql = "INSERT INTO Product (TYPE, MANUFACTURER, NAME) VALUES ('Audio', ?, ?)";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, manufacturerName.getText());
-            pstmt.setString(2, productName.getText());
-            pstmt.executeUpdate(sql);
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, productName.getText());
+            preparedStatement.setString(2, manufacturerName.getText());
+            preparedStatement.executeUpdate();
           } catch (SQLException ex) {
             ex.printStackTrace();
           }
@@ -60,13 +62,7 @@ public class Controller {
   }
 
   @FXML
-  void pushButton3() {}
-
-  @FXML
-  void saveProduct() {
-    productName.setOnAction(e -> productName.getText());
+  void pushButton3() {
+    System.out.println("Button 3 pressed");
   }
-
-  @FXML
-  void saveManufacturer() {}
 }
