@@ -29,8 +29,7 @@
     <Tab text="Product Line">
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
         <Button id="myButton" fx:id="addProduct" layoutX="415.0" layoutY="77.0"
-          mnemonicParsing="false" onMouseClicked="#pushButton1" styleClass="myButton"
-          text="Add Product"/>
+          mnemonicParsing="false" onMouseClicked="#pushButton1" text="Add Product"/>
         <GridPane layoutX="14.0" layoutY="14.0" prefHeight="151.0" prefWidth="350.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
@@ -47,14 +46,15 @@
             GridPane.columnIndex="1" GridPane.rowIndex="1"/>
           <Label id="manufacturer" text="Manufacturer" GridPane.rowIndex="1"/>
           <Label id="type" text="Item Type" GridPane.rowIndex="2"/>
-          <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+          <ChoiceBox fx:id="itemType" prefWidth="150.0" GridPane.columnIndex="1"
+            GridPane.rowIndex="2"/>
         </GridPane>
-        <TableView fx:id="viewProducts" layoutY="165.0" prefHeight="310.0" prefWidth="550.0">
+        <TableView fx:id="viewProducts" layoutY="175.0" prefHeight="295.0" prefWidth="550.0">
           <columns>
-            <TableColumn prefWidth="137.0" text="ID Number"/>
-            <TableColumn prefWidth="137.0" text="Item Type"/>
-            <TableColumn prefWidth="137.0" text="Manufacturer"/>
-            <TableColumn prefWidth="137.0" text="Product Name"/>
+            <TableColumn fx:id="columnId" prefWidth="137.0" text="ID Number"/>
+            <TableColumn fx:id="columnType" prefWidth="137.0" text="Item Type"/>
+            <TableColumn fx:id="columnManufacturer" prefWidth="137.0" text="Manufacturer"/>
+            <TableColumn fx:id="columnName" prefWidth="137.0" text="Product Name"/>
           </columns>
         </TableView>
       </AnchorPane>
