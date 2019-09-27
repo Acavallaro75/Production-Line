@@ -27,7 +27,7 @@
   </rowConstraints>
   <TabPane prefHeight="500.0" prefWidth="550.0" tabClosingPolicy="UNAVAILABLE">
     <Tab text="Product Line">
-      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+      <AnchorPane id="root" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
         <Button id="myButton" fx:id="addProduct" layoutX="415.0" layoutY="77.0"
           mnemonicParsing="false" onMouseClicked="#pushButton1" text="Add Product"/>
         <GridPane layoutX="14.0" layoutY="14.0" prefHeight="151.0" prefWidth="350.0">
@@ -60,7 +60,7 @@
       </AnchorPane>
     </Tab>
     <Tab text="Produce">
-      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+      <AnchorPane id="root" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
         <Button id="myButton" fx:id="recordProduction" layoutX="364.0" layoutY="369.0"
           mnemonicParsing="false" onMouseClicked="#pushButton2" text="Record Production"/>
         <Label layoutX="233.0" layoutY="14.0" text="Choose Product"/>
@@ -70,7 +70,7 @@
       </AnchorPane>
     </Tab>
     <Tab text="Production Log">
-      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+      <AnchorPane id="root" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
         <Button id="myButton" fx:id="productionLogButton" layoutX="253.0" layoutY="222.0"
           mnemonicParsing="false" onMouseClicked="#pushButton3" text="Production Log Button"/>
         <TextArea layoutX="27.0" layoutY="135.0" prefHeight="200.0" prefWidth="200.0"/>

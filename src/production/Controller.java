@@ -71,6 +71,7 @@ public class Controller implements Initializable {
     quantityBox.getItems().clear();
     quantityBox.setItems(obList);
     quantityBox.getSelectionModel().selectFirst();
+    quantityBox.setEditable(true);
     List<String> types = new ArrayList<>();
     types.add("Appliances");
     types.add("Audio");
