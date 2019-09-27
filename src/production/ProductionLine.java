@@ -11,8 +11,10 @@ import javafx.stage.Stage;
  * subclass that extends the superclass Application and derives its methods and fields.
  *
  * @author Andrew Cavallaro
+ * @date 09/27/2019
  */
 public class ProductionLine extends Application {
+
   /**
    * The parent root will link with the production_line.fxml file to receive what will be displayed
    * on the production Stage. The title of the stage is currently set to "Product Tracking System."

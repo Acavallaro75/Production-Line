@@ -1,11 +1,31 @@
+/*
+* This file is used for creating style on the ProductionLine project.
+* It uses all ID tags currently and only edits the background and buttons.
+* The buttons have effects on them as well.
+* @author Andrew Cavallaro
+* @date 09/27/2019
+ */
+
+/*
+* The root ID is the anchor pane used across all tabs. The background color of the anchor pane has
+* been changed to #383838.
+ */
 #root {
   -fx-background-color: #383838;
 }
 
+/*
+* The name, manufacturer, type, and quantity ID's are all text related. The background has been
+* made into a dark color, so the text must be white in order to be read.
+ */
 #name, #manufacturer, #type, #quantity {
   -fx-text-fill: white;
 }
 
+/*
+* This is the CSS for all the buttons. The background color and text inside the button have been
+* changed as well as adding size to the button layout.
+ */
 #myButton {
   -fx-background-color: #090a0c,
   linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
@@ -20,6 +40,9 @@
   -fx-padding: 10 20 10 20;
 }
 
+/*
+* This is the CSS for when the user hovers over a button. The background slightly changes color.
+ */
 #myButton:hover {
   -fx-background-color: #090a0c,
   linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
@@ -27,6 +50,10 @@
   radial-gradient(center 50% 50%, radius 100%, rgba(1, 125, 148, 0.9), rgba(255, 255, 255, 0));
 }
 
+/*
+* This is the CSS for when the user presses a button. The positioning of the button will change
+* to indicate that the button has been pressed.
+ */
 #myButton:pressed {
   -fx-padding: 10 10 10 10;
   -fx-background-insets: 2 0 0 0, 2 0 3 0, 2 0 4 0, 2 0 5 0;
