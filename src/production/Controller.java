@@ -42,7 +42,7 @@ public class Controller {
   private static final String USER = "";
   private static final String PASS = "";
   private static Connection conn;
-  private static PreparedStatement preparedStatement;
+  private static PreparedStatement pstmt;
 
   /**
    * The iniatilizeDB() method is used to create a connection to the H2 database. The getConnection
@@ -72,11 +72,11 @@ public class Controller {
 
   @FXML private TextField manufacturerName;
 
-  @FXML private ChoiceBox<?> itemType;
+  @FXML private ChoiceBox<?> productType;
 
   @FXML private TableView<?> viewProducts;
 
-  @FXML private TableColumn<?, ?> columnId;
+  @FXML private TableColumn<?, ?> columnID;
 
   @FXML private TableColumn<?, ?> columnType;
 
@@ -104,17 +104,16 @@ public class Controller {
     for (int i = 1; i <= 10; i++) {
       numbers.add(i);
     }
-    ObservableList obList = FXCollections.observableList(numbers);
+    ObservableList numberList = FXCollections.observableList(numbers);
     quantityBox.getItems().clear();
-    quantityBox.setItems(obList);
+    quantityBox.setItems(numberList);
     quantityBox.getSelectionModel().selectFirst();
     quantityBox.setEditable(true);
-    List<ItemType> types = new ArrayList<>();
-    types.addAll(Arrays.asList(ItemType.values()));
-    ObservableList observableList = FXCollections.observableList(types);
-    itemType.getItems().clear();
-    itemType.setItems(observableList);
-    itemType.getSelectionModel().selectFirst();
+    List<ItemType> productTypes = new ArrayList<>(Arrays.asList(ItemType.values()));
+    ObservableList typesList = FXCollections.observableList(productTypes);
+    productType.getItems().clear();
+    productType.setItems(typesList);
+    productType.getSelectionModel().selectFirst();
   }
 
   /**
@@ -135,12 +134,11 @@ public class Controller {
           try {
             initializeDB();
             String sql = "INSERT INTO Product (TYPE, MANUFACTURER, NAME) VALUES (?, ?, ?)";
-            preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(
-                1, itemType.getSelectionModel().getSelectedItem().toString());
-            preparedStatement.setString(2, manufacturerName.getText());
-            preparedStatement.setString(3, productName.getText());
-            preparedStatement.executeUpdate();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, productType.getSelectionModel().getSelectedItem().toString());
+            pstmt.setString(2, manufacturerName.getText());
+            pstmt.setString(3, productName.getText());
+            pstmt.executeUpdate();
           } catch (SQLException ex) {
             ex.printStackTrace();
           }
