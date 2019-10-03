@@ -2,7 +2,7 @@ package production;
 
 public abstract class Product implements Item {
   private int ID;
-  String type;
+  private String type;
   private String manufacturer;
   private String name;
 
@@ -30,7 +30,7 @@ public abstract class Product implements Item {
     return manufacturer;
   }
 
-  public String  toString() {
+  public String toString() {
     return "Name: " + name + "\nManufacturer: " + manufacturer + "\nType: " + type;
   }
 }
