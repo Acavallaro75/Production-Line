@@ -36,10 +36,3 @@ public abstract class Product implements Item {
     return "Name: " + name + "\nManufacturer: " + manufacturer + "\nType: " + type;
   }
 }
-
-class Widget extends Product {
-
-  Widget(String name, String manufacturer, String type) {
-    super(name, manufacturer, type);
-  }
-}
