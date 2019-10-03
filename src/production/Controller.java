@@ -129,22 +129,19 @@ public class Controller {
    */
   @FXML
   void addProductButton() {
-    addProduct.setOnAction(
-        e -> {
-          try {
-            initializeDB();
-            String sql = "INSERT INTO Product (TYPE, MANUFACTURER, NAME) VALUES (?, ?, ?)";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, productType.getSelectionModel().getSelectedItem().toString());
-            pstmt.setString(2, manufacturerName.getText());
-            pstmt.setString(3, productName.getText());
-            pstmt.executeUpdate();
-          } catch (SQLException ex) {
-            ex.printStackTrace();
-          }
-          System.out.println("Add Product button was pressed");
-        });
-  }
+    try {
+      initializeDB();
+      String sql = "INSERT INTO Product (TYPE, MANUFACTURER, NAME) VALUES (?, ?, ?)";
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, productType.getSelectionModel().getSelectedItem().toString());
+      pstmt.setString(2, manufacturerName.getText());
+      pstmt.setString(3, productName.getText());
+      pstmt.executeUpdate();
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+    System.out.println("Add Product button was pressed");
+  };
 
   /**
    * This is a simple method for producing a print line to the console when the Record Production
