@@ -6,8 +6,10 @@ public abstract class Product implements Item {
   private String manufacturer;
   private String name;
 
-  public Product(String name) {
+  Product(String name, String manufacturer, String type) {
     this.name = name;
+    this.manufacturer = manufacturer;
+    this.type = type;
   }
 
   public int getID() {
@@ -32,5 +34,12 @@ public abstract class Product implements Item {
 
   public String toString() {
     return "Name: " + name + "\nManufacturer: " + manufacturer + "\nType: " + type;
+  }
+}
+
+class Widget extends Product {
+
+  Widget(String name, String manufacturer, String type) {
+    super(name, manufacturer, type);
   }
 }
