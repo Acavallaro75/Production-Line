@@ -86,7 +86,7 @@ public abstract class Product implements Item {
    * The toString method turns an object into a string variable to see what the values are. The
    * toString() method here does just that.
    *
-   * @return returns name, manufacturer, and types from the H2 Database.
+   * @return returns name, manufacturer, and types from the H2 Database
    */
   public String toString() {
     return "Name: " + name + "\nManufacturer: " + manufacturer + "\nType: " + type;
