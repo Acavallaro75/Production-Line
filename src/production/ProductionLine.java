@@ -7,11 +7,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * The ProductionLine class holds the start method for the JavaFX project. ProductionLine is a
+ * The ProductionLine class holds the start() method for the JavaFX project. ProductionLine is a
  * subclass that extends the superclass Application and derives its methods and fields.
  *
  * @author Andrew Cavallaro
- * @date 09/27/2019
+ * @date 10/07/2019
  */
 public class ProductionLine extends Application {
 

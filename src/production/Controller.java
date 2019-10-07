@@ -18,35 +18,47 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 /**
- * The Controller class that implements most of the logic behind the JavaFX application. Analyze
- * code is showing a declaration redundancy error that the Controller class can be package-private,
- * but when that choice is made the project fails to compile.
+ * The Controller class implements most of the logic behind the JavaFX application. Analyze code is
+ * showing a declaration redundancy error that the Controller class can be package-private, but when
+ * that choice is made the project fails to compile.
  *
  * @author Andrew Cavallaro
- * @date 09/27/2019
+ * @date 10/07/2019
  */
 public class Controller {
 
   /**
-   * Field members of JDBC_DRIVER, DB_URL, USER, and PASS are instantiated for future use. A
-   * Connection Object is created as well as a PreparedStatement Object that will be used to
-   * connecting and communicating with the database. JDBC_DRIVER is the H2 driver that will be used
-   * for the database in this project. The DB_URL is the location of the database and what type of
-   * driver that will be implemented. The USER and PASS fields are the username and password to gain
-   * access to the database. Currently there are no restrictions on the database, hence the "" and
-   * "". There will be bugs due to there being limited security on the database.
+   * Field member JDBC_DRIVER is used to establish what type of JDBC Driver will be used. We are
+   * using an H2 Driver for this project.
    */
   private static final String JDBC_DRIVER = "org.h2.Driver";
 
+  /**
+   * Field member DB_URL holds the location of the H2 Database that will be implemented in this
+   * project.
+   */
   private static final String DB_URL = "jdbc:h2:./production_resources/production";
-  private static final String USER = "";
-  private static final String PASS = "";
-  private static Connection conn;
-  private static PreparedStatement pstmt;
 
   /**
-   * The iniatilizeDB() method is used to create a connection to the H2 database. The getConnection
-   * uses the DB_URL, USER, and PASS fields from above for the Connection Object.
+   * Field member USER holds the user name to gain access to the H2 Database. Since there is no user
+   * name currently, it's left blank.
+   */
+  private static final String USER = "";
+
+  /**
+   * Field member PASS holds the password to gain entry to the H2 Database. Since there is no
+   * password currently, it's left blank. There will be bugs due to there being limited security.
+   */
+  private static final String PASS = "";
+
+  /**
+   * Field member conn is a Connection object that allows the program to connect to the H2 Database.
+   */
+  private static Connection conn;
+
+  /**
+   * The iniatilizeDB() method is used to create a connection to the H2 Database. The getConnection
+   * method uses the DB_URL, USER, and PASS fields from above for the Connection object.
    */
   private void initializeDB() {
     try {
@@ -57,47 +69,53 @@ public class Controller {
     }
   }
 
-  /**
-   * Added below are three (3) buttons: adding a product in the Product Line tab, record production
-   * in the Produce tab, and a button in the Production Log tab. Also added are two (2) text fields
-   * in the Product Line tab that are used for recording user input for a product name and
-   * manufacturer name. There are four (4) table columns added for populating the also added table
-   * view with items from the database on the Product Line tab. Additionally, there is a choice box
-   * added to the Product Line tab used for making choices on an added product. Finally, a combo box
-   * is added to the Produce tab that allows a user to make a selection.
-   */
+  /** The add product button from the Production Line tab. */
   @FXML private Button addProduct;
 
+  /** The product name text field in the Production Line tab. */
   @FXML private TextField productName;
 
+  /** The manufacturer name text field in the Production Line tab. */
   @FXML private TextField manufacturerName;
 
+  /** The choice box that holds the product types in the Production Line tab. */
   @FXML private ChoiceBox<?> productType;
 
+  /** The table view used to view all the elements in the H2 Database in the Production Line tab. */
   @FXML private TableView<?> viewProducts;
 
+  /** The column in the table view that is labeled ID. ID numbers will be displayed here. */
   @FXML private TableColumn<?, ?> columnID;
 
+  /** The column in the table view that is labeled Type. Product types will be displayed here. */
   @FXML private TableColumn<?, ?> columnType;
 
+  /**
+   * The column in the table view that is labeled manufacturer. Product manufacturers will be
+   * displayed here.
+   */
   @FXML private TableColumn<?, ?> columnManufacturer;
 
+  /** The column in the table view that is labeled Name. Product names will be displayed here. */
   @FXML private TableColumn<?, ?> columnName;
 
+  /** The record production button in the Produce tab. */
   @FXML private Button recordProduction;
 
+  /** The combo box that holds the quantity amounts in the Produce tab. */
   @FXML private ComboBox<?> quantityBox;
 
+  /** The production log button in the Production Log tab. */
   @FXML private Button productionLogButton;
 
   /**
-   * The initialize method is used to instantiate the options for the combo box and choice box,
+   * The initialize() method is used to instantiate the options for the combo box and choice box,
    * respectively. Since the combo box is being instantiated with numbers 1-10, a loop was used to
-   * store the numbers. Easy replacement of the number 10 would generate more or fewer numbers if
-   * desired. The same is said for instantiating the choice box. Hard code was used during this to
-   * populate the choice box. Both the choice box and combo box are set to select the first item in
-   * their observable list and display upon first run of the program. The combo box has the option
-   * and ability to edit the value.
+   * store the numbers. Easy replacement of the number 10 would generate more or less numbers if
+   * desired. The second list uses the ItemType enum to instantiate the values to be stored in the
+   * choicebox. An addAll() method was used to bring in all the values from the enum. Both the
+   * choice box and combo box are set to select the first item in their observable list and display
+   * upon first run of the program. The combo box has the option and ability to edit the value.
    */
   public void initialize() {
     List<Integer> numbers = new ArrayList<>();
@@ -117,47 +135,49 @@ public class Controller {
   }
 
   /**
-   * This addProductButton() method is used to create an action event upon the clicking of the add
-   * product button. Once clicked, the initializeDB() method will be called creating a conncetion to
-   * the database. A string SQL Statement is made using the ? placeholders that will be populated
-   * using the choice box, manufacture name text field, and product name text field. The SQL
-   * Statement will be populated and passed in a PreparedStatement and then used to execute an
-   * update. The entered information and selection will then be stored into the database. The button
-   * also creates a print line statement to the console to show that it has been pressed. Current
-   * issue: need to press the Add Product button twice initially before the Add Product button
-   * works. Looking for solutions proactively.
+   * The addProduct() method is used to initialize and enter items into the H2 Database. A prepared
+   * SQL statement is made that will be populated using the productType choice box, manufacturerName
+   * text field, and productName text field. The SQL statement will be populated and passed in a
+   * PreparedStatement and then used to execute an update. The entered information and selection
+   * will then be stored into the H2 Database.
    */
   @FXML
-  void addProductButton() {
+  void addProduct() {
     try {
       initializeDB();
       String sql = "INSERT INTO Product (TYPE, MANUFACTURER, NAME) VALUES (?, ?, ?)";
-      pstmt = conn.prepareStatement(sql);
+      PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, productType.getSelectionModel().getSelectedItem().toString());
       pstmt.setString(2, manufacturerName.getText());
       pstmt.setString(3, productName.getText());
       pstmt.executeUpdate();
+      pstmt.close();
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
-    System.out.println("Add Product button was pressed");
-  };
-
-  /**
-   * This is a simple method for producing a print line to the console when the Record Production
-   * button is pressed on the Produce tab.
-   */
-  @FXML
-  void recordProductionButton() {
-    System.out.println("Button 2 pressed");
   }
 
   /**
-   * This is a simple method for producing a print line to the console when the Production Log
-   * button is pressed on the Production Log tab.
+   * The recordProduction() method is being used temporarily to test the enum ItemType and will
+   * print to the console the values inside there.
    */
   @FXML
-  void productionLogButton() {
-    System.out.println("Button 3 pressed");
+  void recordProduction() {
+    for (ItemType it : ItemType.values()) {
+      System.out.println(it + " " + it.code);
+    }
+  }
+
+  /**
+   * The productionLog() method creates a new Widget object and passes the name, manufacturer, and
+   * type fields to the constructor of the Widget class and will print the results to the console.
+   * This method is here temporarily to show proper use of the abstract Product class.
+   */
+  @FXML
+  void productionLog() {
+    Product product1 = new Widget("iPod", "Apple", "AM");
+    System.out.println(product1.toString());
+    Product product2 = new Widget("Zune", "Microsoft", "AM");
+    System.out.println(product2.toString());
   }
 }

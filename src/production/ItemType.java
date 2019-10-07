@@ -1,13 +1,26 @@
 package production;
 
+/**
+ * Enum ItemType is used to hold all the values for the choice box and their associated codes.
+ *
+ * @author: Andrew Cavallaro
+ * @date: 10/07/2019
+ */
 public enum ItemType {
-  Audio("AU"),
-  Visual("VI"),
-  AudioMobile("AM"),
-  VisualMobile("VM");
+  AUDIO("AU"),
+  VISUAL("VI"),
+  AUDIO_MOBILE("AM"),
+  VISUAL_MOBILE("VM");
 
-  String code;
+  /** Field member code is used to store the code that is passed when ItemType is called. */
+  final String code;
 
+  /**
+   * This is the constructor for the enum ItemType. It takes one parameter for the item code and
+   * sets it equal to the string code field.
+   *
+   * @param code is used to establish what the code is for the item.
+   */
   ItemType(String code) {
     this.code = code;
   }
