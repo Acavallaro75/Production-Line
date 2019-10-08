@@ -16,7 +16,7 @@ public abstract class Product implements Item {
    * Field member type is the type of product that is in the H2 Database. The enum ItemType will
    * establish this value.
    */
-  String type;
+  private final String type;
 
   /** Field member manufacturer is the manufacturer of the product in the H2 Database. */
   private String manufacturer;
@@ -25,7 +25,7 @@ public abstract class Product implements Item {
   private String name;
 
   /**
-   * The Product constructor takes the following three parameters:
+   * The Product constructor takes the following three parameters.
    *
    * @param name is the name of the item being passed into the H2 Database.
    * @param manufacturer is the manufacturer of the item being passed into the H2 Database.
@@ -84,16 +84,5 @@ public abstract class Product implements Item {
 
   public String toString() {
     return "Name: " + name + "\nManufacturer: " + manufacturer + "\nType: " + type;
-  }
-}
-
-/**
- * The class Widget is here primarily for testing purposes as of now. Widget is a child of Product
- * and inherits all of its fields and methods. There will be an error because Widget is not in a
- * file on its own as normal.
- */
-class Widget extends Product {
-  Widget(String name, String manufacturer, String type) {
-    super(name, manufacturer, type);
   }
 }

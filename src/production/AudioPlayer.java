@@ -9,13 +9,13 @@ package production;
 public class AudioPlayer extends Product implements MultimediaControl {
 
   /** Field member supportedAudioFormats is an attribute that belongs to the audio devices. */
-  private String supportedAudioFormats;
+  private final String supportedAudioFormats;
 
   /** Field member supportedPlaylistFormat is an attribute that belongs to the audio devices. */
-  private String supportedPlaylistFormat;
+  private final String supportedPlaylistFormat;
 
   /**
-   * The constructor for the AudioPlayer class has the following parameters:
+   * The constructor for the AudioPlayer class has the following parameters.
    *
    * @param name for the name of the product
    * @param manufacturer for the manufacturer of the product
