@@ -16,7 +16,7 @@ public abstract class Product implements Item {
    * Field member type is the type of product that is in the H2 Database. The enum ItemType will
    * establish this value.
    */
-  private String type;
+  String type;
 
   /** Field member manufacturer is the manufacturer of the product in the H2 Database. */
   private String manufacturer;
@@ -80,16 +80,6 @@ public abstract class Product implements Item {
    */
   public String getManufacturer() {
     return manufacturer;
-  }
-
-  /**
-   * The toString method turns an object into a string variable to see what the values are. The
-   * toString() method here does just that.
-   *
-   * @return returns name, manufacturer, and types from the H2 Database
-   */
-  public String toString() {
-    return "Name: " + name + "\nManufacturer: " + manufacturer + "\nType: " + type;
   }
 }
 

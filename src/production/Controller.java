@@ -159,10 +159,19 @@ public class Controller {
 
   /**
    * The recordProduction() method is being used temporarily to test the enum ItemType and will
-   * print to the console the values inside there.
+   * print to the console the values inside there. AudioPlayer class is instantiated and tested here
+   * as well. It will print to the console if the button on the Produce tab is clicked.
    */
   @FXML
   void recordProduction() {
+    AudioPlayer newProduct =
+        new AudioPlayer(
+            "DP-X1A", "Onkyo", "DSD/FLAC/ALAC/WAV/AIFF/MQA/Ogg-Vorbis/MP3/AAC", "M3U/PLS/WPL");
+    System.out.println(newProduct);
+    newProduct.play();
+    newProduct.stop();
+    newProduct.next();
+    newProduct.previous();
     for (ItemType it : ItemType.values()) {
       System.out.println(it + " " + it.code);
     }
