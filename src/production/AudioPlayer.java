@@ -39,12 +39,7 @@ public class AudioPlayer extends Product implements MultimediaControl {
    * @return returns a sentence with all the appropriate values for the proper attributes.
    */
   public String toString() {
-    return "Name: "
-        + getName()
-        + "\nManufacturer: "
-        + getManufacturer()
-        + "\nType: "
-        + super.type
+    return super.toString()
         + "\nSupported Audio Formats: "
         + supportedAudioFormats
         + "\nSupported Playlist Formats: "

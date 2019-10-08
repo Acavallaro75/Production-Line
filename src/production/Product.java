@@ -81,6 +81,10 @@ public abstract class Product implements Item {
   public String getManufacturer() {
     return manufacturer;
   }
+
+  public String toString() {
+    return "Name: " + name + "\nManufacturer: " + manufacturer + "\nType: " + type;
+  }
 }
 
 /**
