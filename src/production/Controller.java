@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
  * that choice is made the project fails to compile.
  *
  * @author Andrew Cavallaro
- * @date 10/07/2019
+ * @date 10/14/2019
  */
 public class Controller {
 
@@ -158,35 +158,34 @@ public class Controller {
   }
 
   /**
-   * The recordProduction() method is being used temporarily to test the enum ItemType and will
-   * print to the console the values inside there. AudioPlayer class is instantiated and tested here
-   * as well. It will print to the console if the button on the Produce tab is clicked.
+   * The recordProduction() method tests the functionality of the MultimediaControl interface. It
+   * establishes that both AudioPlayer and MoviePlayer can both be instantiated and pass methods and
+   * values to the classes. To test functionality, press the Record Production button on the Produce
+   * tab. The results will simply print to the console.
    */
   @FXML
   void recordProduction() {
-    AudioPlayer newProduct =
+    AudioPlayer newAudioProduct =
         new AudioPlayer(
             "DP-X1A", "Onkyo", "DSD/FLAC/ALAC/WAV/AIFF/MQA/Ogg-Vorbis/MP3/AAC", "M3U/PLS/WPL");
-    System.out.println(newProduct);
-    newProduct.play();
-    newProduct.stop();
-    newProduct.next();
-    newProduct.previous();
-    for (ItemType it : ItemType.values()) {
-      System.out.println(it + " " + it.code);
+    Screen newScreen = new Screen("720x480", 40, 22);
+    MoviePlayer newMovieProduct =
+        new MoviePlayer("DBPOWER MK101", "OracleProduction", newScreen, MonitorType.LCD);
+    ArrayList<MultimediaControl> productList = new ArrayList<>();
+    productList.add(newAudioProduct);
+    productList.add(newMovieProduct);
+    for (MultimediaControl p : productList) {
+      System.out.println(p);
+      p.play();
+      p.stop();
+      p.next();
+      p.previous();
     }
   }
 
-  /**
-   * The productionLog() method creates a new Widget object and passes the name, manufacturer, and
-   * type fields to the constructor of the Widget class and will print the results to the console.
-   * This method is here temporarily to show proper use of the abstract Product class.
-   */
+  /** The productionLog() method simply prints to the console for now. */
   @FXML
   void productionLog() {
-    Product product1 = new Widget("iPod", "Apple", "AM");
-    System.out.println(product1.toString());
-    Product product2 = new Widget("Zune", "Microsoft", "AM");
-    System.out.println(product2.toString());
+    System.out.println("Button 3 pushed");
   }
 }

@@ -5,6 +5,9 @@ package production;
  * inside the MultimediaControl interface. It contains all the methods inside both the Product and
  * MultimediaContol classes, respectively. The AudioPlayer() method is used to set up audio devices
  * in the H2 Database.
+ *
+ * @author: Andrew Cavallaro
+ * @date: 10/14/2019
  */
 public class AudioPlayer extends Product implements MultimediaControl {
 
@@ -17,10 +20,10 @@ public class AudioPlayer extends Product implements MultimediaControl {
   /**
    * The constructor for the AudioPlayer class has the following parameters.
    *
-   * @param name for the name of the product
-   * @param manufacturer for the manufacturer of the product
-   * @param supportedAudioFormats for the supportedAudioFormat of the product
-   * @param supportedPlaylistFormat for the supportedPlaylistFormat of the product
+   * @param name for the name of the audio product
+   * @param manufacturer for the manufacturer of the audio product
+   * @param supportedAudioFormats for the supportedAudioFormat of the audio product
+   * @param supportedPlaylistFormat for the supportedPlaylistFormat of the audio product
    */
   AudioPlayer(
       String name,
@@ -58,11 +61,11 @@ public class AudioPlayer extends Product implements MultimediaControl {
 
   /** The next() method currently serves no purpose but to print to the console. */
   public void next() {
-    System.out.println("Previous");
+    System.out.println("Next");
   }
 
   /** The previous() method currently serves no purpose but to print to the console. */
   public void previous() {
-    System.out.println("Next");
+    System.out.println("Previous");
   }
 }

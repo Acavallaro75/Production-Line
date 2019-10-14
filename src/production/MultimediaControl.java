@@ -1,10 +1,11 @@
 package production;
 
 /**
- * This interface is used to instantiate the play(), stop(), previous(), and next() methods.
+ * The MultimediaControl interface is used to instantiate the play(), stop(), previous(), and next()
+ * methods.
  *
  * @author: Andrew Cavallaro
- * @date: 10/07/2019
+ * @date: 10/14/2019
  */
 interface MultimediaControl {
 

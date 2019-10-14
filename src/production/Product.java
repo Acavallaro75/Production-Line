@@ -5,7 +5,7 @@ package production;
  * methods in the Item interface.
  *
  * @author: Andrew Cavallaro
- * @date: 10/07/2019
+ * @date: 10/14/2019
  */
 public abstract class Product implements Item {
 

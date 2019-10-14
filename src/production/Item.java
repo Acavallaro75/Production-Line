@@ -1,11 +1,11 @@
 package production;
 
 /**
- * The interface Item is used to store the methods that must be used in the abstract Product class.
+ * The Item interface is used to store the methods that must be used in the abstract Product class.
  * These methods can be used elsewhere if needed also.
  *
  * @author: Andrew Cavallaro
- * @date: 10/07/2019
+ * @date: 10/14/2019
  */
 interface Item {
 
