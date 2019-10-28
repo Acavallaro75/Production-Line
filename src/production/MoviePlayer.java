@@ -7,7 +7,7 @@ package production;
  * in the H2 Database.
  *
  * @author: Andrew Cavallaro
- * @date: 10/14/2019
+ * @date: 10/28/2019
  */
 public class MoviePlayer extends Product implements MultimediaControl {
 

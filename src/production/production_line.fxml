@@ -49,12 +49,12 @@
           <ChoiceBox fx:id="productType" prefWidth="150.0" GridPane.columnIndex="1"
             GridPane.rowIndex="2"/>
         </GridPane>
-        <TableView fx:id="viewProducts" layoutY="175.0" prefHeight="295.0" prefWidth="550.0">
+        <TableView layoutY="175.0" prefHeight="295.0" prefWidth="550.0">
           <columns>
-            <TableColumn fx:id="columnID" prefWidth="137.0" text="ID Number"/>
-            <TableColumn fx:id="columnType" prefWidth="137.0" text="Item Type"/>
-            <TableColumn fx:id="columnManufacturer" prefWidth="137.0" text="Manufacturer"/>
-            <TableColumn fx:id="columnName" prefWidth="137.0" text="Product Name"/>
+            <TableColumn prefWidth="137.0" text="ID Number"/>
+            <TableColumn prefWidth="137.0" text="Item Type"/>
+            <TableColumn prefWidth="137.0" text="Manufacturer"/>
+            <TableColumn prefWidth="137.0" text="Product Name"/>
           </columns>
         </TableView>
       </AnchorPane>
@@ -62,20 +62,20 @@
     <Tab text="Produce">
       <AnchorPane id="root" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
         <Button id="myButton" fx:id="recordProduction" layoutX="364.0" layoutY="369.0"
-          mnemonicParsing="false" onMouseClicked="#recordProduction"
-          text="Record Production"/>
+          mnemonicParsing="false" onMouseClicked="#recordProduction" text="Record Production"/>
         <Label layoutX="233.0" layoutY="14.0" text="Choose Product"/>
-        <ListView layoutX="10.0" layoutY="34.0" prefHeight="300.0" prefWidth="530.0"/>
+        <ListView fx:id="produceList" layoutX="10.0" layoutY="34.0" prefHeight="300.0"
+          prefWidth="530.0"/>
         <Label id="quantity" layoutX="37.0" layoutY="373.0" text="Choose Quantity"/>
         <ComboBox fx:id="quantityBox" layoutX="165.0" layoutY="369.0" prefWidth="150.0"/>
       </AnchorPane>
     </Tab>
     <Tab text="Production Log">
       <AnchorPane id="root" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-        <Button id="myButton" fx:id="productionLogButton" layoutX="253.0" layoutY="222.0"
-          mnemonicParsing="false" onMouseClicked="#productionLog"
-          text="Production Log Button"/>
-        <TextArea layoutX="27.0" layoutY="135.0" prefHeight="200.0" prefWidth="200.0"/>
+        <Button id="myButton" layoutX="364.0" layoutY="369.0"
+          mnemonicParsing="false" onMouseClicked="#productionLog" text="Production Log Button"/>
+        <TextArea fx:id="productLogView" layoutX="10.0" layoutY="34.0" prefHeight="300.0"
+          prefWidth="530.0"/>
       </AnchorPane>
     </Tab>
   </TabPane>

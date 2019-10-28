@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  * subclass that extends the superclass Application and derives its methods and fields.
  *
  * @author Andrew Cavallaro
- * @date 10/14/2019
+ * @date 10/28/2019
  */
 public class ProductionLine extends Application {
 
@@ -28,8 +28,13 @@ public class ProductionLine extends Application {
     production.show();
   }
 
-  /** This is the main method that launches any arguments being passed. */
+  /**
+   * This is the main method that launches any arguments being passed. Controller object
+   * myController is used to initialize the database without having to press a button first.
+   */
   public static void main(String[] args) {
+    Controller myController = new Controller();
+    myController.initializeDB();
     launch(args);
   }
 }

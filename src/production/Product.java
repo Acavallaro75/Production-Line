@@ -5,7 +5,7 @@ package production;
  * methods in the Item interface.
  *
  * @author: Andrew Cavallaro
- * @date: 10/14/2019
+ * @date: 10/28/2019
  */
 public abstract class Product implements Item {
 
@@ -16,7 +16,7 @@ public abstract class Product implements Item {
    * Field member type is the type of product that is in the H2 Database. The enum ItemType will
    * establish this value.
    */
-  private final String type;
+  final String type;
 
   /** Field member manufacturer is the manufacturer of the product in the H2 Database. */
   private String manufacturer;

@@ -5,7 +5,7 @@ package production;
  * getResponseTime() methods.
  *
  * @author: Andrew Cavallaro
- * @date: 10/14/2019
+ * @date: 10/28/2019
  */
 interface ScreenSpec {
 
