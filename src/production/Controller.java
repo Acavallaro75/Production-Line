@@ -142,8 +142,8 @@ public class Controller {
   @FXML
   private void addProduct() {
     try {
-      if (productName.getSelectedText().equalsIgnoreCase("")
-          || manufacturerName.getSelectedText().equalsIgnoreCase("")) {
+      if (productName.getText().equalsIgnoreCase("")
+          || manufacturerName.getText().equalsIgnoreCase("")) {
         System.out.println("Please try again");
       } else {
         String sql = "INSERT INTO Product (TYPE, MANUFACTURER, NAME) VALUES (?, ?, ?)";
