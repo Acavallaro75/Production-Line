@@ -12,6 +12,8 @@ public enum ItemType {
   AUDIO_MOBILE("AM"),
   VISUAL_MOBILE("VM");
 
+  String code;
+
   /**
    * This is the constructor for the enum ItemType. It takes one parameter for the item code and
    * sets it equal to the string code field.
@@ -19,6 +21,6 @@ public enum ItemType {
    * @param code is used to establish what the code is for the item.
    */
   ItemType(String code) {
-    System.out.print("");
+    this.code = code;
   }
 }
