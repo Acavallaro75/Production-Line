@@ -144,7 +144,10 @@ public class Controller {
     try {
       if (productName.getText().equalsIgnoreCase("")
           || manufacturerName.getText().equalsIgnoreCase("")) {
-        System.out.println("Please try again");
+        Alert error = new Alert(AlertType.ERROR);
+        error.setHeaderText("Error");
+        error.setContentText("Please fill out all fields before entering.");
+        error.show();
       } else {
         String sql = "INSERT INTO Product (TYPE, MANUFACTURER, NAME) VALUES (?, ?, ?)";
         PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -190,21 +193,16 @@ public class Controller {
   /** The productionLog() method simply prints to the console for now. */
   @FXML
   void productionLog() {
-    AudioPlayer newAudioProduct =
-        new AudioPlayer(
-            "DP-X1A", "Onkyo", "DSD/FLAC/ALAC/WAV/AIFF/MQA/Ogg-Vorbis/MP3/AAC", "M3U/PLS/WPL");
-    Screen newScreen = new Screen("720x480", 40, 22);
-    MoviePlayer newMovieProduct =
-        new MoviePlayer("DBPOWER MK101", "OracleProduction", newScreen, MonitorType.LCD);
-    ArrayList<MultimediaControl> productList = new ArrayList<MultimediaControl>();
-    productList.add(newAudioProduct);
-    productList.add(newMovieProduct);
-    for (MultimediaControl p : productList) {
-      System.out.println(p);
-      p.play();
-      p.stop();
-      p.next();
-      p.previous();
+    Product productProduced = new Widget("iPod", "Apple", ItemType.AUDIO);
+
+    // test constructor used when creating production records from user interface
+    int numProduced = 3; // this will come from the combobox in the UI
+    int itemCount = 0;
+
+    for (int productionRunProduct = 0; productionRunProduct < numProduced; productionRunProduct++) {
+      ProductionRecord pr = new ProductionRecord(productProduced, itemCount++);
+      // using the iterator as the product id for testing
+      System.out.println(pr.toString());
     }
   }
 }

@@ -29,7 +29,7 @@ public class MoviePlayer extends Product implements MultimediaControl {
    * @param monitorType the monitor type of the movie product
    */
   MoviePlayer(String name, String manufacturer, Screen screen, MonitorType monitorType) {
-    super(name, manufacturer, "VISUAL");
+    super(name, manufacturer, ItemType.VISUAL);
     this.monitorType = monitorType;
     this.screen = screen;
   }

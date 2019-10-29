@@ -16,7 +16,7 @@ public abstract class Product implements Item {
    * Field member type is the type of product that is in the H2 Database. The enum ItemType will
    * establish this value.
    */
-  final String type;
+  final ItemType type;
 
   /** Field member manufacturer is the manufacturer of the product in the H2 Database. */
   private String manufacturer;
@@ -31,7 +31,7 @@ public abstract class Product implements Item {
    * @param manufacturer is the manufacturer of the item being passed into the H2 Database.
    * @param type is the type of item being passed into the H2 Database.
    */
-  Product(String name, String manufacturer, String type) {
+  Product(String name, String manufacturer, ItemType type) {
     this.name = name;
     this.manufacturer = manufacturer;
     this.type = type;
@@ -84,5 +84,11 @@ public abstract class Product implements Item {
 
   public String toString() {
     return "Name: " + name + "\nManufacturer: " + manufacturer + "\nType: " + type;
+  }
+}
+
+class Widget extends Product {
+  Widget(String name, String manufacturer, ItemType itemType) {
+    super(name, manufacturer, itemType);
   }
 }
