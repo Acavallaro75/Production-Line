@@ -7,7 +7,7 @@ package production;
  * in the H2 Database.
  *
  * @author: Andrew Cavallaro
- * @date: 10/28/2019
+ * @date: 10/29/2019
  */
 public class AudioPlayer extends Product implements MultimediaControl {
 
@@ -18,7 +18,11 @@ public class AudioPlayer extends Product implements MultimediaControl {
   private final String supportedPlaylistFormat;
 
   /**
-   * The constructor for the AudioPlayer class has the following parameters.
+   * The constructor for the AudioPlayer class has the following parameters: name, manufacturer,
+   * supportedAudioFormat, and supportedPlaylistFormat. The name, manufacturer, and ItemType are
+   * passed to the parent, Product, class. The supportedAudioFormats and supportedPlaylistFormats
+   * arguments are assigned to the field members supportedAudioFormats and supportedPlaylistFormats,
+   * respectively.
    *
    * @param name for the name of the audio product
    * @param manufacturer for the manufacturer of the audio product
@@ -37,7 +41,7 @@ public class AudioPlayer extends Product implements MultimediaControl {
 
   /**
    * The toString() method prints the values of an object to the console. This is what it performs
-   * here.
+   * here. It also calls the parent class, Product, and its toString() method.
    *
    * @return returns a sentence with all the appropriate values for the proper attributes.
    */

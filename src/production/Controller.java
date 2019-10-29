@@ -27,7 +27,7 @@ import javafx.scene.control.TextField;
  * that choice is made the project fails to compile.
  *
  * @author Andrew Cavallaro
- * @date 10/28/2019
+ * @date 10/29/2019
  */
 public class Controller {
 
@@ -99,12 +99,12 @@ public class Controller {
    * second list uses the ItemType enum to instantiate the values to be stored in the choicebox. An
    * addAll() method was used to bring in all the values from the enum. Both the choice box and
    * combo box are set to select the first item in their observable list and display upon first run
-   * of the program. The combo box has the option and ability to edit the value.
+   * of the program.
    */
   public void initialize() throws SQLException {
     ObservableList<String> items = FXCollections.observableArrayList();
     produceList.setItems(items);
-    String query = "SELECT * FROM PRODUCT WHERE NAME != ''";
+    String query = "SELECT * FROM PRODUCT WHERE NAME OR MANUFACTURER != ''";
     Statement statement = conn.createStatement();
     ResultSet resultSet = statement.executeQuery(query);
     while (resultSet.next()) {
@@ -137,7 +137,9 @@ public class Controller {
    * SQL statement is made that will be populated using the productType choice box, manufacturerName
    * text field, and productName text field. The SQL statement will be populated and passed in a
    * PreparedStatement and then used to execute an update. The entered information and selection
-   * will then be stored into the H2 Database.
+   * will then be stored into the H2 Database. An error message is displayed to the user if either
+   * of the name or manufacturer text fields are left blank. This avoids accidental input of blank
+   * items into the H2 Database.
    */
   @FXML
   private void addProduct() {
@@ -190,19 +192,20 @@ public class Controller {
     }
   }
 
-  /** The productionLog() method simply prints to the console for now. */
+  /**
+   * The productionLog() method is the main() method used from issue 5 to show that it is indeed
+   * working on this project.
+   */
   @FXML
   void productionLog() {
     Product productProduced = new Widget("iPod", "Apple", ItemType.AUDIO);
-
-    // test constructor used when creating production records from user interface
-    int numProduced = 3; // this will come from the combobox in the UI
+    String quantityChosen = quantityBox.getValue().toString();
+    int record = Integer.parseInt(quantityChosen);
     int itemCount = 0;
-
-    for (int productionRunProduct = 0; productionRunProduct < numProduced; productionRunProduct++) {
-      ProductionRecord pr = new ProductionRecord(productProduced, itemCount++);
-      // using the iterator as the product id for testing
-      System.out.println(pr.toString());
+    for (int i = 0; i < record; i++) {
+      ProductionRecord addToProduction = new ProductionRecord(productProduced, itemCount);
+      itemCount = itemCount + 1;
+      System.out.println(addToProduction.toString());
     }
   }
 }

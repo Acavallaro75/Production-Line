@@ -5,7 +5,7 @@ package production;
  * methods in the Item interface.
  *
  * @author: Andrew Cavallaro
- * @date: 10/28/2019
+ * @date: 10/29/2019
  */
 public abstract class Product implements Item {
 
@@ -25,7 +25,9 @@ public abstract class Product implements Item {
   private String name;
 
   /**
-   * The Product constructor takes the following three parameters.
+   * The Product constructor takes the following parameters: name, manufacturer, and type. The
+   * passed arguments will be set to the field members name, manufacturer, and type. The itemType
+   * argument must be of Object ItemType to be passed.
    *
    * @param name is the name of the item being passed into the H2 Database.
    * @param manufacturer is the manufacturer of the item being passed into the H2 Database.
@@ -84,11 +86,5 @@ public abstract class Product implements Item {
 
   public String toString() {
     return "Name: " + name + "\nManufacturer: " + manufacturer + "\nType: " + type;
-  }
-}
-
-class Widget extends Product {
-  Widget(String name, String manufacturer, ItemType itemType) {
-    super(name, manufacturer, itemType);
   }
 }

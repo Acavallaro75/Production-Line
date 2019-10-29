@@ -7,7 +7,7 @@ package production;
  * in the H2 Database.
  *
  * @author: Andrew Cavallaro
- * @date: 10/28/2019
+ * @date: 10/29/2019
  */
 public class MoviePlayer extends Product implements MultimediaControl {
 
@@ -21,7 +21,11 @@ public class MoviePlayer extends Product implements MultimediaControl {
   private final MonitorType monitorType;
 
   /**
-   * The MoviePlayer constructor takes the following parameters.
+   * The MoviePlayer constructor takes the following parameters: name, manufacturer, screen, and
+   * monitorType. The name, manufacturer, and ItemType are passed to the parent, Product, class. The
+   * screen and monitorType arguments are passed to the screen and monitorType field members,
+   * respectively. The screen must be of Object Screen and monitorType must be of Object MonitorType
+   * to be passed as arguments.
    *
    * @param name the name of the movie product
    * @param manufacturer the manufacturer of the movie product
@@ -36,7 +40,7 @@ public class MoviePlayer extends Product implements MultimediaControl {
 
   /**
    * The toString() method prints the values of an object to the console. This is what it performs
-   * here.
+   * here. It also calls the parent class, Product, and its toString() method.
    *
    * @return returns a sentence with all the appropriate values for the proper attributes.
    */

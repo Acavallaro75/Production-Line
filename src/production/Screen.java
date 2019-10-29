@@ -5,7 +5,7 @@ package production;
  * methods of the ScreenSpec interface.
  *
  * @author: Andrew Cavallaro
- * @date: 10/28/2019
+ * @date: 10/29/2019
  */
 public class Screen implements ScreenSpec {
 
@@ -19,7 +19,9 @@ public class Screen implements ScreenSpec {
   private final int responseTime;
 
   /**
-   * The constructor for the Screen class has the following parameters.
+   * The constructor for the Screen class has the following parameters: resolution, refreshRate, and
+   * responseTime. All arguments are then assigned to the field members resolution, refreshRate, and
+   * responseTime, respectively.
    *
    * @param resolution for the resolution of the movie product
    * @param refreshRate for the refresh rate of the movie product
