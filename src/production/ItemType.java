@@ -24,4 +24,13 @@ public enum ItemType {
   ItemType(String code) {
     this.code = code;
   }
+
+  /**
+   * The getCode() method is used to return the code for the ItemType.
+   *
+   * @return the code for the ItemType.
+   */
+  String getCode() {
+    return this.code;
+  }
 }

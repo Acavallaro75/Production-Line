@@ -104,7 +104,7 @@ public class Controller {
   public void initialize() throws SQLException {
     ObservableList<String> items = FXCollections.observableArrayList();
     produceList.setItems(items);
-    String query = "SELECT * FROM PRODUCT WHERE NAME OR MANUFACTURER != ''";
+    String query = "SELECT * FROM PRODUCT";
     Statement statement = conn.createStatement();
     ResultSet resultSet = statement.executeQuery(query);
     while (resultSet.next()) {
