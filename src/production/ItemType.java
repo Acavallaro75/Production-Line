@@ -13,7 +13,7 @@ public enum ItemType {
   VISUAL_MOBILE("VM");
 
   /** Field member code is used to establish the code for the ItemType. */
-  String code;
+  private final String code;
 
   /**
    * This is the constructor for the enum ItemType. It takes one parameter for the item code and
