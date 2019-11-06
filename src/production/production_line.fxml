@@ -49,12 +49,12 @@
           <ChoiceBox fx:id="productType" prefWidth="150.0" GridPane.columnIndex="1"
             GridPane.rowIndex="2"/>
         </GridPane>
-        <TableView layoutY="175.0" prefHeight="295.0" prefWidth="550.0">
+        <TableView fx:id="tableViewProducts" layoutY="175.0" prefHeight="295.0" prefWidth="550.0">
           <columns>
-            <TableColumn prefWidth="137.0" text="ID Number"/>
-            <TableColumn prefWidth="137.0" text="Item Type"/>
-            <TableColumn prefWidth="137.0" text="Manufacturer"/>
-            <TableColumn prefWidth="137.0" text="Product Name"/>
+            <TableColumn fx:id="idColumn" prefWidth="137.0" text="ID Number"/>
+            <TableColumn fx:id="typeColumn" prefWidth="137.0" text="Item Type"/>
+            <TableColumn fx:id="manufacturerColumn" prefWidth="137.0" text="Manufacturer"/>
+            <TableColumn fx:id="nameColumn" prefWidth="137.0" text="Product Name"/>
           </columns>
         </TableView>
       </AnchorPane>

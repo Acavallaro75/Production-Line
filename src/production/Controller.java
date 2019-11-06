@@ -18,8 +18,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * The Controller class implements most of the logic behind the JavaFX application. Analyze code is
@@ -27,7 +30,7 @@ import javafx.scene.control.TextField;
  * that choice is made the project fails to compile.
  *
  * @author Andrew Cavallaro
- * @date 10/29/2019
+ * @date 11/05/2019
  */
 public class Controller {
 
@@ -73,6 +76,9 @@ public class Controller {
     }
   }
 
+  /** The table view in the Production Line tab. */
+  @FXML private TableView<Product> tableViewProducts;
+
   /** The product name text field in the Production Line tab. */
   @FXML private TextField productName;
 
@@ -80,7 +86,7 @@ public class Controller {
   @FXML private TextField manufacturerName;
 
   /** The choice box that holds the product types in the Production Line tab. */
-  @FXML private ChoiceBox<?> productType;
+  @FXML private ChoiceBox<ItemType> productType;
 
   /** The combo box that holds the quantity amounts in the Produce tab. */
   @FXML private ComboBox<?> quantityBox;
@@ -89,7 +95,22 @@ public class Controller {
   @FXML private TextArea productLogView;
 
   /** The list view in the Produce tab. */
-  @FXML private ListView<String> produceList;
+  @FXML private ListView<Product> produceList;
+
+  /** The column for ID numbers in the Production Line tab. */
+  @FXML private TableColumn<?, ?> idColumn;
+
+  /** The column for item type in the Production Line tab. */
+  @FXML private TableColumn<?, ?> typeColumn;
+
+  /** The column for manufacturer name in the Production Line tab. */
+  @FXML private TableColumn<?, ?> manufacturerColumn;
+
+  /** The column for product name in the Production Line tab. */
+  @FXML private TableColumn<?, ?> nameColumn;
+
+  /** ObservableList will be used to accept new product objects on the Production Line tab. */
+  private ObservableList<Product> productLine;
 
   /**
    * The initialize() method is used to instantiate the options for the combo box and choice box,
@@ -102,19 +123,43 @@ public class Controller {
    * of the program.
    */
   public void initialize() throws SQLException {
-    ObservableList<String> items = FXCollections.observableArrayList();
-    produceList.setItems(items);
+    productLine = FXCollections.observableArrayList();
+    nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+    manufacturerColumn.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
+    typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+    idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+    tableViewProducts.setItems(productLine);
+    productLine.add(new Product("iPod", "Apple", ItemType.AUDIO));
+    produceList.setItems(productLine);
     String query = "SELECT * FROM PRODUCT";
     Statement statement = conn.createStatement();
     ResultSet resultSet = statement.executeQuery(query);
     while (resultSet.next()) {
-      items.addAll(
-          "Manufacturer: "
-              + resultSet.getString("Manufacturer")
-              + " \nName: "
-              + resultSet.getString("Name")
-              + " \nType: "
-              + resultSet.getString("Type"));
+      if (resultSet.getString("Type").equalsIgnoreCase("AUDIO")) {
+        productLine.add(
+            new Product(
+                resultSet.getString("Name"), resultSet.getString("Manufacturer"), ItemType.AUDIO));
+        produceList.setItems(productLine);
+      } else if (resultSet.getString("Type").equalsIgnoreCase("VISUAL")) {
+        productLine.add(
+            new Product(
+                resultSet.getString("Name"), resultSet.getString("Manufacturer"), ItemType.VISUAL));
+        produceList.setItems(productLine);
+      } else if (resultSet.getString("Type").equalsIgnoreCase("AUDIO_MOBILE")) {
+        productLine.add(
+            new Product(
+                resultSet.getString("Name"),
+                resultSet.getString("Manufacturer"),
+                ItemType.AUDIO_MOBILE));
+        produceList.setItems(productLine);
+      } else if (resultSet.getString("Type").equalsIgnoreCase("VISUAL_MOBILE")) {
+        productLine.add(
+            new Product(
+                resultSet.getString("Name"),
+                resultSet.getString("Manufacturer"),
+                ItemType.VISUAL_MOBILE));
+        produceList.setItems(productLine);
+      }
     }
     List<Integer> numbers = new ArrayList<>();
     for (int i = 1; i <= 10; i++) {
@@ -158,6 +203,37 @@ public class Controller {
         pstmt.setString(3, productName.getText());
         pstmt.executeUpdate();
         pstmt.close();
+        String name = productName.getText();
+        String manufacturer = manufacturerName.getText();
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        manufacturerColumn.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        if (productType
+            .getSelectionModel()
+            .getSelectedItem()
+            .toString()
+            .equalsIgnoreCase("AUDIO")) {
+          productLine.add(new Product(name, manufacturer, ItemType.AUDIO));
+        } else if (productType
+            .getSelectionModel()
+            .getSelectedItem()
+            .toString()
+            .equalsIgnoreCase("VISUAL")) {
+          productLine.add(new Product(name, manufacturer, ItemType.VISUAL));
+        } else if (productType
+            .getSelectionModel()
+            .getSelectedItem()
+            .toString()
+            .equalsIgnoreCase("AUDIO_MOBILE")) {
+          productLine.add(new Product(name, manufacturer, ItemType.AUDIO_MOBILE));
+        } else if (productType
+            .getSelectionModel()
+            .getSelectedItem()
+            .toString()
+            .equalsIgnoreCase("VISUAL_MOBILE")) {
+          productLine.add(new Product(name, manufacturer, ItemType.VISUAL_MOBILE));
+        }
       }
     } catch (SQLException ex) {
       ex.printStackTrace();

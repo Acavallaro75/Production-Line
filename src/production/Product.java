@@ -7,7 +7,7 @@ package production;
  * @author: Andrew Cavallaro
  * @date: 10/29/2019
  */
-public abstract class Product implements Item {
+public class Product implements Item {
 
   /** Field member id is the ID number for the products in the H2 Database. */
   private int id;
@@ -23,6 +23,18 @@ public abstract class Product implements Item {
 
   /** Field member name is the name of the product in the H2 Database. */
   private String name;
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public ItemType getType() {
+    return type;
+  }
 
   /**
    * The Product constructor takes the following parameters: name, manufacturer, and type. The

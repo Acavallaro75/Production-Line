@@ -2,22 +2,35 @@ package production;
 
 import java.util.Date;
 
-/** */
+/**
+ * The ProductionRecord class is mainly used to record production on the Produce tab.
+ *
+ * @author: Andrew Cavallaro
+ * @date: 10/29/2019
+ */
 class ProductionRecord {
 
-  /** */
+  /** Field member productionNumber records the number of items that are going into production. */
   private int productionNumber;
 
-  /** */
+  /** Field member productID is the ID number of the product in the H2 Database. */
   private int productID;
 
-  /** */
+  /** Field member serialNumber is the serial number of the item going into the H2 Database. */
   private String serialNumber;
 
-  /** */
+  /**
+   * Field member dateProduced records the date and time of production of an item or group of items
+   * that are being stored into production.
+   */
   private Date dateProduced = new Date();
 
-  /** @param productID */
+  /**
+   * The ProductionRecord() default constructor that is used to record production on the Produce
+   * tab.
+   *
+   * @param productID requires a product ID
+   */
   public ProductionRecord(int productID) {
     this.productID = productID;
     productionNumber = 0;
@@ -26,8 +39,10 @@ class ProductionRecord {
   }
 
   /**
-   * @param product
-   * @param numberOfItems
+   * The ProductionRecord() overloaded constructor
+   *
+   * @param product requires a type of Product to be passed
+   * @param numberOfItems is selected from the combo box on the Produce tab
    */
   ProductionRecord(Product product, int numberOfItems) {
     String padded = String.format("%05d", numberOfItems);
