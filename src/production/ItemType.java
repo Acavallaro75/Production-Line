@@ -4,7 +4,7 @@ package production;
  * Enum ItemType is used to hold all the values for the choice box and their associated codes.
  *
  * @author: Andrew Cavallaro
- * @date: 10/29/2019
+ * @date: 11/05/2019
  */
 public enum ItemType {
   AUDIO("AU"),
