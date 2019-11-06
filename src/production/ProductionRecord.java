@@ -6,7 +6,7 @@ import java.util.Date;
  * The ProductionRecord class is mainly used to record production on the Produce tab.
  *
  * @author: Andrew Cavallaro
- * @date: 10/29/2019
+ * @date: 11/05/2019
  */
 class ProductionRecord {
 
@@ -39,7 +39,8 @@ class ProductionRecord {
   }
 
   /**
-   * The ProductionRecord() overloaded constructor
+   * The ProductionRecord() overloaded constructor. It takes the following parameters: Product and
+   * numberOfItems.
    *
    * @param product requires a type of Product to be passed
    * @param numberOfItems is selected from the combo box on the Produce tab
@@ -50,10 +51,13 @@ class ProductionRecord {
   }
 
   /**
-   * @param productionNumber
-   * @param productID
-   * @param serialNumber
-   * @param dateProduced
+   * The constructor for the ProductionRecord class. It takes the following parameters:
+   * productionNumber, productID, serialNumber, and dateProduced.
+   *
+   * @param productionNumber requires a production number value
+   * @param productID requires a product ID value
+   * @param serialNumber requires a serial number value
+   * @param dateProduced requires a date object to be passed
    */
   public ProductionRecord(
       int productionNumber, int productID, String serialNumber, Date dateProduced) {
@@ -63,7 +67,12 @@ class ProductionRecord {
     this.dateProduced = dateProduced;
   }
 
-  /** @return */
+  /**
+   * The toString() method prints the values of an object to the console. This is what it performs
+   * here.
+   *
+   * @return returns a sentence with all the appropriate values for the proper attributes.
+   */
   @Override
   public String toString() {
     return "Prod. Num: "
@@ -76,42 +85,74 @@ class ProductionRecord {
         + dateProduced;
   }
 
-  /** @param productionNumber */
+  /**
+   * The setProductionNumber is used to set the production number of the item(s) being created.
+   *
+   * @param productionNumber requires a production number
+   */
   public void setProductionNumber(int productionNumber) {
     this.productionNumber = productionNumber;
   }
 
-  /** @return */
+  /**
+   * The getProductionNumber() method returns the production number of the item(s) being created.
+   *
+   * @return productionNumber field member value
+   */
   public int getProductionNumber() {
     return productionNumber;
   }
 
-  /** @param productID */
+  /**
+   * The setProductID() method sets the product ID in the H2 Database.
+   *
+   * @param productID requires the parameter for the Product ID
+   */
   public void setProductID(int productID) {
     this.productID = productID;
   }
 
-  /** @return */
+  /**
+   * The getProductID() method returns the product ID of the item(s) being created.
+   *
+   * @return productID field member value
+   */
   public int getProductID() {
     return productID;
   }
 
-  /** @param serialNumber */
+  /**
+   * The setSerialNumber() method sets the product's serial number in the H2 Database.
+   *
+   * @param serialNumber requires a serial number to be passed
+   */
   public void setSerialNumber(String serialNumber) {
     this.serialNumber = serialNumber;
   }
 
-  /** @return */
+  /**
+   * The getSerialNumber() method returns the serial number of the item(s) being created.
+   *
+   * @return serialNumber field member value
+   */
   public String getSerialNumber() {
     return serialNumber;
   }
 
-  /** @param dateProduced */
+  /**
+   * The setDateProduced() method sets the date produced value for the item(s) being created.
+   *
+   * @param dateProduced requires a Date Object to be passed
+   */
   public void setDateProduced(Date dateProduced) {
     this.dateProduced = dateProduced;
   }
 
-  /** @return */
+  /**
+   * The getDateProduced() method returns the date of the item(s) being created in Date format.
+   *
+   * @return dateProduced field member value
+   */
   public Date getDateProduced() {
     return dateProduced;
   }
