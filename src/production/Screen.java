@@ -5,27 +5,27 @@ package production;
  * methods of the ScreenSpec interface.
  *
  * @author: Andrew Cavallaro
- * @date: 11/05/2019
+ * @date: 11/19/2019
  */
 public class Screen implements ScreenSpec {
 
-  /** Field member resolution is an attribute that belongs to the movie devices. */
+  /** Field member "resolution" is an attribute that belongs to the movie devices. */
   private final String resolution;
 
-  /** Field member refreshRate is an attribute that belongs to the movie devices. */
+  /** Field member "refreshRate" is an attribute that belongs to the movie devices. */
   private final int refreshRate;
 
-  /** Field member responseTime is an attribute that belongs to the movie devices. */
+  /** Field member "responseTime" is an attribute that belongs to the movie devices. */
   private final int responseTime;
 
   /**
-   * The constructor for the Screen class has the following parameters: resolution, refreshRate, and
-   * responseTime. All arguments are then assigned to the field members resolution, refreshRate, and
-   * responseTime, respectively.
+   * The constructor for the Screen class has the following parameters: "resolution", "refreshRate",
+   * and "responseTime". All arguments are then assigned to the field members "resolution",
+   * "refreshRate", and "responseTime", respectively.
    *
-   * @param resolution for the resolution of the movie product
-   * @param refreshRate for the refresh rate of the movie product
-   * @param responseTime for the response time of the movie product
+   * @param resolution for the "resolution" of the movie product
+   * @param refreshRate for the "refresh rate" of the movie product
+   * @param responseTime for the "response time" of the movie product
    */
   Screen(String resolution, int refreshRate, int responseTime) {
     this.resolution = resolution;
@@ -34,27 +34,27 @@ public class Screen implements ScreenSpec {
   }
 
   /**
-   * The getResolution() method gets the resolution of the movie product in the H2 Database.
+   * The getResolution() method gets the "resolution" of the movie product in the database.
    *
-   * @return returns the movie product's resolution
+   * @return returns the movie product's "resolution"
    */
   public String getResolution() {
     return resolution;
   }
 
   /**
-   * The getRefreshRate() method gets the refresh rate of the product in the H2 Database.
+   * The getRefreshRate() method gets the "refresh rate" of the product in the database.
    *
-   * @return returns the movie product's refresh rate
+   * @return returns the movie product's "refresh rate"
    */
   public int getRefreshRate() {
     return refreshRate;
   }
 
   /**
-   * The getResponseTime() method gets the response time of the product in the H2 Database.
+   * The getResponseTime() method gets the "response time" of the product in the database.
    *
-   * @return returns the movie product's response time
+   * @return returns the movie product's "response time"
    */
   public int getResponseTime() {
     return responseTime;

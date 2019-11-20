@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/H2/1.4.196/h2-1.4.196.jar!/" />
+          <root url="jar://$MODULE_DIR$/production_resources/h2-1.4.196.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -26,141 +27,104 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * The Controller class implements most of the logic behind the JavaFX application. Analyze code is
- * showing a declaration redundancy error that the Controller class can be package-private, but when
- * that choice is made the project fails to compile.
+ * showing a declaration redundancy error that the Controller class can be made package-private, but
+ * when that choice is made the project fails to compile.
  *
  * @author Andrew Cavallaro
- * @date 11/05/2019
+ * @date 11/19/2019
  */
 public class Controller {
 
-  /**
-   * Field member JDBC_DRIVER is used to establish what type of JDBC Driver will be used. We are
-   * using an H2 Driver for this project.
-   */
-  private static final String JDBC_DRIVER = "org.h2.Driver";
+  /** The table view that displays all products in the database and their associated values. */
+  @FXML private TableView<Product> tableViewProducts;
+
+  /** The product name text field that is used to gather the name of the product. */
+  @FXML private TextField productName;
+
+  /** The product manufacturer text field that is used to gather the manufacturer of the product. */
+  @FXML private TextField manufacturerName;
+
+  /** The choice box that holds the item type values from the ItemType Enum class. */
+  @FXML private ChoiceBox<ItemType> productType;
+
+  /** The combo box that holds the quantity amounts and is used to record production. */
+  @FXML private ComboBox<Integer> quantityBox;
+
+  /** The text area that is used to display all of the recorded production of products. */
+  @FXML private TextArea productLogView;
+
+  /** The list view that displays all of the products in the database. */
+  @FXML private ListView<Product> produceList;
+
+  /** The column for ID numbers which is generated from the database. */
+  @FXML private TableColumn<?, ?> idColumn;
+
+  /** The column for item type which is generated from the database. */
+  @FXML private TableColumn<?, ?> typeColumn;
+
+  /** The column for manufacturer name which is generated from the database. */
+  @FXML private TableColumn<?, ?> manufacturerColumn;
+
+  /** The column for product name which is generated from the database. */
+  @FXML private TableColumn<?, ?> nameColumn;
 
   /**
-   * Field member DB_URL holds the location of the H2 Database that will be implemented in this
-   * project.
-   */
-  private static final String DB_URL = "jdbc:h2:./production_resources/production";
-
-  /**
-   * Field member USER holds the user name to gain access to the H2 Database. Since there is no user
-   * name currently, it's left blank.
-   */
-  private static final String USER = "";
-
-  /**
-   * Field member PASS holds the password to gain entry to the H2 Database. Since there is no
-   * password currently, it's left blank. There will be bugs due to there being limited security.
-   */
-  private static final String PASS = "";
-
-  /**
-   * Field member conn is a Connection object that allows the program to connect to the H2 Database.
+   * Field member "conn" is a Connection object that allows the program to connect to the database.
    */
   private static Connection conn;
 
   /**
-   * The iniatilizeDB() method is used to create a connection to the H2 Database. The getConnection
-   * method uses the DB_URL, USER, and PASS fields from above for the Connection object.
+   * The iniatilizeDB() method is used to create a connection to the database. Field member "driver"
+   * is used to establish what type of JDBC driver will be used. Field member "url" holds the
+   * location of the database. Field member "user" holds the username to gain access to the
+   * database. Field member "pass" holds the password to gain entry to the database. Since there is
+   * no user name or password currently, they are left blank.There will be bugs due to there being
+   * limited security. The getConnection() method uses the "url", "user", and "pass" field members
+   * for the Connection object.
    */
-  void initializeDB() {
+  static void initializeDB() {
     try {
-      Class.forName(JDBC_DRIVER);
-      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+      final String driver = "org.h2.Driver";
+      final String url = "jdbc:h2:./production_resources/production";
+      final String user = "";
+      final String pass = "";
+      Class.forName(driver);
+      conn = DriverManager.getConnection(url, user, pass);
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
-  /** The table view in the Production Line tab. */
-  @FXML private TableView<Product> tableViewProducts;
-
-  /** The product name text field in the Production Line tab. */
-  @FXML private TextField productName;
-
-  /** The manufacturer name text field in the Production Line tab. */
-  @FXML private TextField manufacturerName;
-
-  /** The choice box that holds the product types in the Production Line tab. */
-  @FXML private ChoiceBox<ItemType> productType;
-
-  /** The combo box that holds the quantity amounts in the Produce tab. */
-  @FXML private ComboBox<?> quantityBox;
-
-  /** The text area in the Production Log tab. */
-  @FXML private TextArea productLogView;
-
-  /** The list view in the Produce tab. */
-  @FXML private ListView<Product> produceList;
-
-  /** The column for ID numbers in the Production Line tab. */
-  @FXML private TableColumn<?, ?> idColumn;
-
-  /** The column for item type in the Production Line tab. */
-  @FXML private TableColumn<?, ?> typeColumn;
-
-  /** The column for manufacturer name in the Production Line tab. */
-  @FXML private TableColumn<?, ?> manufacturerColumn;
-
-  /** The column for product name in the Production Line tab. */
-  @FXML private TableColumn<?, ?> nameColumn;
-
-  /** ObservableList will be used to accept new product objects on the Production Line tab. */
+  /**
+   * The ObservableList "productLine" will be used to accept new Product objects and the contents of
+   * the ObservableList will be used to generate the table view and list view.
+   */
   private ObservableList<Product> productLine;
 
   /**
-   * The initialize() method is used to instantiate the options for the combo box and choice box,
-   * respectively. It also pulls from the H2 Database to populate the list view on the Produce tab.
-   * Since the combo box is being instantiated with numbers 1-10, a loop was used to store the
-   * numbers. Easy replacement of the number 10 would generate more or less numbers if desired. The
-   * second list uses the ItemType enum to instantiate the values to be stored in the choicebox. An
-   * addAll() method was used to bring in all the values from the enum. Both the choice box and
-   * combo box are set to select the first item in their observable list and display upon first run
-   * of the program.
+   * The initialize() method calls the following methods: setupProductLineTable(),
+   * loadProductList(), loadProductionLog(), and setupProductLineComboBoxes(). Please see the
+   * individual methods to learn more about what they do.
+   *
+   * @throws SQLException in case of a SQL error
    */
   public void initialize() throws SQLException {
-    productLine = FXCollections.observableArrayList();
-    nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-    manufacturerColumn.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
-    typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-    idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-    tableViewProducts.setItems(productLine);
-    productLine.add(new Product("iPod", "Apple", ItemType.AUDIO));
-    produceList.setItems(productLine);
-    String query = "SELECT * FROM PRODUCT";
-    Statement statement = conn.createStatement();
-    ResultSet resultSet = statement.executeQuery(query);
-    while (resultSet.next()) {
-      if (resultSet.getString("Type").equalsIgnoreCase("AUDIO")) {
-        productLine.add(
-            new Product(
-                resultSet.getString("Name"), resultSet.getString("Manufacturer"), ItemType.AUDIO));
-        produceList.setItems(productLine);
-      } else if (resultSet.getString("Type").equalsIgnoreCase("VISUAL")) {
-        productLine.add(
-            new Product(
-                resultSet.getString("Name"), resultSet.getString("Manufacturer"), ItemType.VISUAL));
-        produceList.setItems(productLine);
-      } else if (resultSet.getString("Type").equalsIgnoreCase("AUDIO_MOBILE")) {
-        productLine.add(
-            new Product(
-                resultSet.getString("Name"),
-                resultSet.getString("Manufacturer"),
-                ItemType.AUDIO_MOBILE));
-        produceList.setItems(productLine);
-      } else if (resultSet.getString("Type").equalsIgnoreCase("VISUAL_MOBILE")) {
-        productLine.add(
-            new Product(
-                resultSet.getString("Name"),
-                resultSet.getString("Manufacturer"),
-                ItemType.VISUAL_MOBILE));
-        produceList.setItems(productLine);
-      }
-    }
+    setupProductLineTable();
+    loadProductList();
+    loadProductionLog();
+    setupProductLineComboBoxes();
+  }
+
+  /**
+   * The setupProductLineComboBoxes() method is used to set up the combo boxes with appropriate
+   * values. Since the "quantity" combo box is being instantiated with numbers 1-10, a loop was used
+   * to store the numbers in a List named "numbers", which was then used to populate the combo box.
+   * The second List, named "productTypes", uses the ItemType Enum class to instantiate the values
+   * to be stored in the combo box. An addAll() method was used to bring in all of the values from
+   * the ItemType Enum class. Both of the combo boxes are set to display the first item in their
+   * Observablelist.
+   */
+  private void setupProductLineComboBoxes() {
     List<Integer> numbers = new ArrayList<>();
     for (int i = 1; i <= 10; i++) {
       numbers.add(i);
@@ -174,17 +138,82 @@ public class Controller {
     productType.getItems().clear();
     productType.setItems(typesList);
     productType.getSelectionModel().selectFirst();
+  }
+
+  /**
+   * The setupProductionLineTable() method is used to set up the table view with the appropriate
+   * values from the "productLine" ObservableList which is populated from the database.
+   */
+  private void setupProductLineTable() {
+    productLine = FXCollections.observableArrayList();
+    nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+    manufacturerColumn.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
+    typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+    idColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
+    tableViewProducts.setItems(productLine);
+  }
+
+  /**
+   * The loadProductList() method is used to set up the list view and uses the ObservabltList
+   * "productLine" to generate values to display. The SQL statement searches the database and
+   * returns all the products that will populate the "productLine" ObservableList. If-else
+   * statements are used to differentiate the item types of the products from the database. Lastly,
+   * it calls the loadProductionLog() method.
+   *
+   * @throws SQLException in case of a SQL error
+   */
+  private void loadProductList() throws SQLException {
+    produceList.setItems(productLine);
+    String query = "SELECT * FROM PRODUCT";
+    Statement statement = conn.createStatement();
+    ResultSet resultSet = statement.executeQuery(query);
+    while (resultSet.next()) {
+      if (resultSet.getString("Type").equalsIgnoreCase("AUDIO")) {
+        productLine.add(
+            new Product(
+                resultSet.getInt("ID"),
+                resultSet.getString("Name"),
+                resultSet.getString("Manufacturer"),
+                ItemType.AUDIO));
+        produceList.setItems(productLine);
+      } else if (resultSet.getString("Type").equalsIgnoreCase("VISUAL")) {
+        productLine.add(
+            new Product(
+                resultSet.getInt("ID"),
+                resultSet.getString("Name"),
+                resultSet.getString("Manufacturer"),
+                ItemType.VISUAL));
+        produceList.setItems(productLine);
+      } else if (resultSet.getString("Type").equalsIgnoreCase("AUDIO_MOBILE")) {
+        productLine.add(
+            new Product(
+                resultSet.getInt("ID"),
+                resultSet.getString("Name"),
+                resultSet.getString("Manufacturer"),
+                ItemType.AUDIO_MOBILE));
+        produceList.setItems(productLine);
+      } else if (resultSet.getString("Type").equalsIgnoreCase("VISUAL_MOBILE")) {
+        productLine.add(
+            new Product(
+                resultSet.getInt("ID"),
+                resultSet.getString("Name"),
+                resultSet.getString("Manufacturer"),
+                ItemType.VISUAL_MOBILE));
+        produceList.setItems(productLine);
+      }
+    }
     statement.close();
   }
 
   /**
-   * The addProduct() method is used to initialize and enter items into the H2 Database. A prepared
-   * SQL statement is made that will be populated using the productType choice box, manufacturerName
-   * text field, and productName text field. The SQL statement will be populated and passed in a
-   * PreparedStatement and then used to execute an update. The entered information and selection
-   * will then be stored into the H2 Database. An error message is displayed to the user if either
-   * of the name or manufacturer text fields are left blank. This avoids accidental input of blank
-   * items into the H2 Database.
+   * The addProduct() method is used to enter products into the database. A PreparedStatement is
+   * made that will be populated using the "productType" choice box, "manufacturerName" text field,
+   * and "productName" text field. The populated SQL statement will then be passed in a
+   * PreparedStatement and used to execute an update to the database. If-else statements are used to
+   * differentiate between item types and allow them to be passed to the database. An error message
+   * is displayed to the user if either of the name or manufacturer text fields are left blank. This
+   * avoids accidental input of blank items into the database. Lastly, it calls the
+   * setupProductLineTable() and loadProductList() methods.
    */
   @FXML
   private void addProduct() {
@@ -234,6 +263,8 @@ public class Controller {
             .equalsIgnoreCase("VISUAL_MOBILE")) {
           productLine.add(new Product(name, manufacturer, ItemType.VISUAL_MOBILE));
         }
+        setupProductLineTable();
+        loadProductList();
       }
     } catch (SQLException ex) {
       ex.printStackTrace();
@@ -241,30 +272,86 @@ public class Controller {
   }
 
   /**
-   * The recordProduction() function is used to get the product from the H2 Database and make
-   * production logs of that product. String data is used to get the combo box value as a String and
-   * then converted into an integer named record. An alert is shown if no item in the list view is
-   * chosen. Once an item in the list view is chosen and a quantity is selected, the user will push
-   * the Record Production button to submit. On the Production Log tab, the user will see the items
-   * they just produced, how many, and when the production was done.
+   * The recordProduction() method is used to gather ProductionRecord objects. An ArrayList named
+   * "productionRun" is used to store the ProductionRecord objects that can be used to populate the
+   * "productLogView" text area. An alert is shown if no item in the list view is chosen. Lastly, it
+   * calls the addToProductionDB(), loadProductionLog(), and showProduction() methods.
    */
   @FXML
   void recordProduction() {
-    String data = quantityBox.getValue().toString();
-    int record = Integer.parseInt(data);
+    Date date = new Date();
     if (produceList.getSelectionModel().getSelectedItem() == null) {
       Alert error = new Alert(AlertType.ERROR);
       error.setHeaderText("Error");
       error.setContentText("Please choose a product to add to the production log.");
       error.show();
     } else {
-      productLogView.appendText(
-          produceList.getSelectionModel().getSelectedItem()
-              + "\nQuantity: "
-              + record
-              + "\nDate: "
-              + new Date()
-              + "\n");
+      ArrayList<ProductionRecord> productionRun = new ArrayList<>();
+      productionRun.add(
+          new ProductionRecord(
+              produceList.getSelectionModel().getSelectedItem(),
+              quantityBox.getSelectionModel().getSelectedItem(),
+              0,
+              new Timestamp(date.getTime())));
+      addToProductionDB(productionRun);
+      loadProductionLog();
+      // showProduction();
+    }
+  }
+
+  private void loadProductionLog() {
+    try {
+      String sql = "SELECT * FROM PRODUCTIONRECORD";
+      Statement statement = conn.createStatement();
+      ResultSet resultSet = statement.executeQuery(sql);
+      while (resultSet.next()) {
+        productLogView.appendText(resultSet.getString("SERIAL_NUMBER") + "\n");
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
+  /*private void showProduction() {
+    productLogView.appendText(
+        produceList.getSelectionModel().getSelectedItem().toString() + "\n");
+    productLogView.appendText(Arrays.toString(productionRecord) + "\n");
+  }*/
+
+  /**
+   * The addToProductionDB() method is used to enter product production into the database. The
+   * ArrayList "productionRun" is made into an array of ProductionRecord objects in order to obtain
+   * the methods associated with the ProductionRecord class. A PreparedStatement is made that will
+   * be populated using the ProductRecord objects and their associated methods. The information is
+   * then entered into the database. Lastly, it calls the loadProductionLog() method.
+   *
+   * @param productionRun requires an ArrayList of ProductionRecord objects
+   */
+  private void addToProductionDB(ArrayList<ProductionRecord> productionRun) {
+    ProductionRecord[] productionRecord = productionRun.toArray(new ProductionRecord[0]);
+    Product product =
+        new Product(
+            produceList.getSelectionModel().getSelectedItem().getID(),
+            produceList.getSelectionModel().getSelectedItem().getName(),
+            produceList.getSelectionModel().getSelectedItem().getManufacturer(),
+            produceList.getSelectionModel().getSelectedItem().getType());
+    Date date = new Date();
+    try {
+      String sql =
+          "INSERT INTO PRODUCTIONRECORD (PRODUCTION_NUMBER, PRODUCT_ID, SERIAL_NUMBER, "
+              + "DATE_PRODUCED, NAME) VALUES (?, ?, ?, ?, ?)";
+      PreparedStatement preparedStatement = conn.prepareStatement(sql);
+      preparedStatement.setInt(1, productionRecord[0].getProductionNumber());
+      preparedStatement.setInt(2, product.getID());
+      preparedStatement.setString(3, productionRecord[0].getSerialNumber());
+      preparedStatement.setTimestamp(
+          4, (Timestamp) productionRecord[0].getDateProduced(new Timestamp(date.getTime())));
+      preparedStatement.setString(5, product.getName());
+      preparedStatement.executeUpdate();
+      preparedStatement.close();
+      loadProductionLog();
+    } catch (SQLException ex) {
+      ex.printStackTrace();
     }
   }
 
@@ -274,14 +361,6 @@ public class Controller {
    */
   @FXML
   void productionLog() {
-    Product productProduced = new Widget("iPod", "Apple", ItemType.AUDIO);
-    String quantityChosen = quantityBox.getValue().toString();
-    int record = Integer.parseInt(quantityChosen);
-    int itemCount = 0;
-    for (int i = 0; i < record; i++) {
-      ProductionRecord addToProduction = new ProductionRecord(productProduced, itemCount);
-      itemCount = itemCount + 1;
-      System.out.println(addToProduction.toString());
-    }
+    System.out.println("Button pressed");
   }
 }

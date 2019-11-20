@@ -24,14 +24,6 @@ public class Product implements Item {
   /** Field member name is the name of the product in the H2 Database. */
   private String name;
 
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
   public ItemType getType() {
     return type;
   }
@@ -45,10 +37,19 @@ public class Product implements Item {
    * @param manufacturer is the manufacturer of the item being passed into the H2 Database.
    * @param type is the type of item being passed into the H2 Database.
    */
+  Product(int id, String name, String manufacturer, ItemType type) {
+    this.id = id;
+    this.name = name;
+    this.manufacturer = manufacturer;
+    this.type = type;
+    this.id = getID();
+  }
+
   Product(String name, String manufacturer, ItemType type) {
     this.name = name;
     this.manufacturer = manufacturer;
     this.type = type;
+    this.id = getID();
   }
 
   /**
