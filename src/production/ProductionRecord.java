@@ -12,19 +12,19 @@ import java.util.Date;
 class ProductionRecord {
 
   /** Field member "productionNumber" records the number of items that are going into production. */
-  private int productionNumber;
+  private final int productionNumber;
 
   /** Field member "productID" is the ID number of the product in the database. */
-  private int productID;
+  private final int productID;
 
   /** Field member "serialNumber" is the serial number of the item going into the database. */
-  private String serialNumber;
+  private final String serialNumber;
 
   /**
    * Field member "dateProduced" records the date and time of production of an item or group of
    * items that are being stored into production.
    */
-  private Date dateProduced;
+  private final Date dateProduced;
 
   /**
    * The overloaded ProductionRecord constructor. It takes the following parameters: "product",

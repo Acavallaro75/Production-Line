@@ -10,7 +10,7 @@ package production;
 public class Product implements Item {
 
   /** Field member "id" is the ID number for the products in the database. */
-  private int id;
+  private final int id;
 
   /**
    * Field member "type" is the type of product that is in the database. The enum ItemType will
@@ -19,10 +19,10 @@ public class Product implements Item {
   final ItemType type;
 
   /** Field member "manufacturer" is the manufacturer of the product in the database. */
-  private String manufacturer;
+  private final String manufacturer;
 
   /** Field member "name" is the name of the product in the database. */
-  private String name;
+  private final String name;
 
   /**
    * The getType() method gets the product's ItemType from the database. I can not make this

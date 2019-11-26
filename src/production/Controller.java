@@ -324,7 +324,7 @@ public class Controller {
             new ProductionRecord(
                 produceList.getSelectionModel().getSelectedItem(),
                 quantityBox.getSelectionModel().getSelectedItem(),
-                0,
+                produceList.getSelectionModel().getSelectedItem().getID(),
                 new Timestamp(date.getTime())));
         addToProductionDB(productionRun);
         showProduction();
@@ -356,15 +356,15 @@ public class Controller {
       resultSet = statement.executeQuery(sql);
       while (resultSet.next()) {
         productLogView.appendText(
-            "Prod. Number: "
-                + resultSet.getString("PRODUCTION_NUMBER")
-                + " Product Name: "
+            "Product Name: "
                 + resultSet.getString("NAME")
-                + " Serial Number: "
+                + "\nProduction Number: "
+                + resultSet.getString("PRODUCTION_NUMBER")
+                + "\nSerial Number: "
                 + resultSet.getString("SERIAL_NUMBER")
-                + " Date Produced: "
+                + "\nDate Produced: "
                 + resultSet.getTimestamp("DATE_PRODUCED")
-                + "\n");
+                + "\n--------------------------------------------------------------------\n");
       }
     } catch (SQLException e) {
       e.printStackTrace();
