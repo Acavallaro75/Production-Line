@@ -42,7 +42,10 @@ public class Product implements Item {
     this.name = name;
     this.manufacturer = manufacturer;
     this.type = type;
-    this.id = getID();
+  }
+
+  Product(ItemType type) {
+    this.type = type;
   }
 
   Product(String name, String manufacturer, ItemType type) {

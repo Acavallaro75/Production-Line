@@ -11,11 +11,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -74,6 +76,24 @@ public class Controller {
   private static Connection conn;
 
   /**
+   * Field member "statement" is a Statement object that allows for data to be retrieved from the
+   * database.
+   */
+  private Statement statement;
+
+  /**
+   * Field member "preparedStatement" is a PreparedStatement object that allows for data to be
+   * passed into a SQL statement and for data to be retrieved from the database.
+   */
+  private PreparedStatement preparedStatement;
+
+  /**
+   * Field member "resultSet" is ResultSet object that allows for data in the database to searched
+   * over.
+   */
+  private ResultSet resultSet;
+
+  /**
    * The iniatilizeDB() method is used to create a connection to the database. Field member "driver"
    * is used to establish what type of JDBC driver will be used. Field member "url" holds the
    * location of the database. Field member "user" holds the username to gain access to the
@@ -87,7 +107,7 @@ public class Controller {
       final String driver = "org.h2.Driver";
       final String url = "jdbc:h2:./production_resources/production";
       final String user = "";
-      final String pass = "";
+      final String pass = "password";
       Class.forName(driver);
       conn = DriverManager.getConnection(url, user, pass);
     } catch (Exception e) {
@@ -111,8 +131,8 @@ public class Controller {
   public void initialize() throws SQLException {
     setupProductLineTable();
     loadProductList();
-    loadProductionLog();
     setupProductLineComboBoxes();
+    showProduction();
   }
 
   /**
@@ -165,8 +185,8 @@ public class Controller {
   private void loadProductList() throws SQLException {
     produceList.setItems(productLine);
     String query = "SELECT * FROM PRODUCT";
-    Statement statement = conn.createStatement();
-    ResultSet resultSet = statement.executeQuery(query);
+    statement = conn.createStatement();
+    resultSet = statement.executeQuery(query);
     while (resultSet.next()) {
       if (resultSet.getString("Type").equalsIgnoreCase("AUDIO")) {
         productLine.add(
@@ -226,12 +246,13 @@ public class Controller {
         error.show();
       } else {
         String sql = "INSERT INTO Product (TYPE, MANUFACTURER, NAME) VALUES (?, ?, ?)";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1, productType.getSelectionModel().getSelectedItem().toString());
-        pstmt.setString(2, manufacturerName.getText());
-        pstmt.setString(3, productName.getText());
-        pstmt.executeUpdate();
-        pstmt.close();
+        preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setString(
+            1, productType.getSelectionModel().getSelectedItem().toString());
+        preparedStatement.setString(2, manufacturerName.getText());
+        preparedStatement.setString(3, productName.getText());
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
         String name = productName.getText();
         String manufacturer = manufacturerName.getText();
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -286,37 +307,64 @@ public class Controller {
       error.setContentText("Please choose a product to add to the production log.");
       error.show();
     } else {
-      ArrayList<ProductionRecord> productionRun = new ArrayList<>();
-      productionRun.add(
-          new ProductionRecord(
-              produceList.getSelectionModel().getSelectedItem(),
-              quantityBox.getSelectionModel().getSelectedItem(),
-              0,
-              new Timestamp(date.getTime())));
-      addToProductionDB(productionRun);
-      loadProductionLog();
-      // showProduction();
+      Alert confirmation = new Alert(AlertType.CONFIRMATION);
+      confirmation.setContentText(
+          "Confirm production of: "
+              + quantityBox.getSelectionModel().getSelectedItem().toString()
+              + " "
+              + produceList.getSelectionModel().getSelectedItem().getManufacturer()
+              + " "
+              + produceList.getSelectionModel().getSelectedItem().getName()
+              + "?");
+      Optional<ButtonType> result = confirmation.showAndWait();
+      ButtonType button = result.orElse(ButtonType.CANCEL);
+      if (button == ButtonType.OK) {
+        ArrayList<ProductionRecord> productionRun = new ArrayList<>();
+        productionRun.add(
+            new ProductionRecord(
+                produceList.getSelectionModel().getSelectedItem(),
+                quantityBox.getSelectionModel().getSelectedItem(),
+                0,
+                new Timestamp(date.getTime())));
+        addToProductionDB(productionRun);
+        showProduction();
+      } else {
+        Alert cancel = new Alert(AlertType.INFORMATION);
+        cancel.setHeaderText("Cancel");
+        cancel.setContentText(
+            "Canceling production of "
+                + quantityBox.getSelectionModel().getSelectedItem().toString()
+                + " "
+                + produceList.getSelectionModel().getSelectedItem().getManufacturer()
+                + " "
+                + produceList.getSelectionModel().getSelectedItem().getName());
+        cancel.show();
+      }
     }
   }
 
-  private void loadProductionLog() {
+  private void showProduction() {
+    productLogView.clear();
     try {
       String sql = "SELECT * FROM PRODUCTIONRECORD";
-      Statement statement = conn.createStatement();
-      ResultSet resultSet = statement.executeQuery(sql);
+      statement = conn.createStatement();
+      resultSet = statement.executeQuery(sql);
       while (resultSet.next()) {
-        productLogView.appendText(resultSet.getString("SERIAL_NUMBER") + "\n");
+        productLogView.appendText(
+            "Prod. Number: "
+                + resultSet.getString("PRODUCTION_NUMBER")
+                + " Product Name: "
+                + resultSet.getString("NAME")
+                + " Serial Number: "
+                + resultSet.getString("SERIAL_NUMBER")
+                + " Date Produced: "
+                + resultSet.getTimestamp("DATE_PRODUCED")
+                + "\n");
       }
     } catch (SQLException e) {
       e.printStackTrace();
     }
   }
-
-  /*private void showProduction() {
-    productLogView.appendText(
-        produceList.getSelectionModel().getSelectedItem().toString() + "\n");
-    productLogView.appendText(Arrays.toString(productionRecord) + "\n");
-  }*/
 
   /**
    * The addToProductionDB() method is used to enter product production into the database. The
@@ -340,7 +388,7 @@ public class Controller {
       String sql =
           "INSERT INTO PRODUCTIONRECORD (PRODUCTION_NUMBER, PRODUCT_ID, SERIAL_NUMBER, "
               + "DATE_PRODUCED, NAME) VALUES (?, ?, ?, ?, ?)";
-      PreparedStatement preparedStatement = conn.prepareStatement(sql);
+      preparedStatement = conn.prepareStatement(sql);
       preparedStatement.setInt(1, productionRecord[0].getProductionNumber());
       preparedStatement.setInt(2, product.getID());
       preparedStatement.setString(3, productionRecord[0].getSerialNumber());
@@ -349,7 +397,6 @@ public class Controller {
       preparedStatement.setString(5, product.getName());
       preparedStatement.executeUpdate();
       preparedStatement.close();
-      loadProductionLog();
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
@@ -361,6 +408,9 @@ public class Controller {
    */
   @FXML
   void productionLog() {
-    System.out.println("Button pressed");
+    showProduction();
+    Alert confirmation = new Alert(AlertType.CONFIRMATION);
+    confirmation.setContentText("All production items have been successfully updated");
+    confirmation.show();
   }
 }

@@ -36,7 +36,7 @@ class ProductionRecord {
     this.productionNumber = productionNumber;
     this.productID = productID;
     this.dateProduced = dateProduced;
-    String padded = String.format("%05d", productID);
+    String padded = String.format("%05d", product.getID());
     this.serialNumber = product.getManufacturer().substring(0, 3) + product.type.getCode() + padded;
   }
 
