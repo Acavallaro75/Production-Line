@@ -33,7 +33,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * when that choice is made the project fails to compile.
  *
  * @author Andrew Cavallaro
- * @date 11/19/2019
+ * @date 11/26/2019
  */
 public class Controller {
 
@@ -98,9 +98,9 @@ public class Controller {
    * is used to establish what type of JDBC driver will be used. Field member "url" holds the
    * location of the database. Field member "user" holds the username to gain access to the
    * database. Field member "pass" holds the password to gain entry to the database. Since there is
-   * no user name or password currently, they are left blank.There will be bugs due to there being
-   * limited security. The getConnection() method uses the "url", "user", and "pass" field members
-   * for the Connection object.
+   * no username, it is left blank. There will be bugs due to there being a hardcoded password. The
+   * getConnection() method uses the "url", "user", and "pass" field members for the Connection
+   * object.
    */
   static void initializeDB() {
     try {
@@ -123,7 +123,7 @@ public class Controller {
 
   /**
    * The initialize() method calls the following methods: setupProductLineTable(),
-   * loadProductList(), loadProductionLog(), and setupProductLineComboBoxes(). Please see the
+   * loadProductList(), setupProductLineComboBoxes(), and showProduction(). Please see the
    * individual methods to learn more about what they do.
    *
    * @throws SQLException in case of a SQL error
@@ -343,6 +343,11 @@ public class Controller {
     }
   }
 
+  /**
+   * The showProduction() method shows all the production of items in the database. It is called
+   * whenever an item is put into the database and loaded upon initial run in the initialize()
+   * method.
+   */
   private void showProduction() {
     productLogView.clear();
     try {
@@ -403,8 +408,8 @@ public class Controller {
   }
 
   /**
-   * The productionLog() method is the main() method used from issue 5 to show that it is indeed
-   * working on this project.
+   * The productionLog() method is used to show the user the updated production log of products from
+   * the database.
    */
   @FXML
   void productionLog() {
