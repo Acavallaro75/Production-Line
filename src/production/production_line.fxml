@@ -72,10 +72,18 @@
     </Tab>
     <Tab text="Production Log">
       <AnchorPane id="root" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-        <Button id="myButton" layoutX="364.0" layoutY="369.0" mnemonicParsing="false"
+        <Button id="myButton" layoutX="196.0" layoutY="379.0" mnemonicParsing="false"
           onMouseClicked="#productionLog" text="Production Log Button"/>
         <TextArea fx:id="productLogView" editable="false" layoutX="10.0" layoutY="34.0"
           prefHeight="300.0" prefWidth="530.0"/>
+      </AnchorPane>
+    </Tab>
+    <Tab text="Employee">
+      <AnchorPane id="root" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+      <Button id="myButton" fx:id="createEmployee" layoutX="364.0" layoutY="369.0"
+        mnemonicParsing="false" onMouseClicked="#recordProduction" text="Record Production"/>
+      <TextArea fx:id="allEmployees" editable="false" layoutX="10.0" layoutY="34.0"
+        prefHeight="300.0" prefWidth="530.0"/>
       </AnchorPane>
     </Tab>
   </TabPane>
