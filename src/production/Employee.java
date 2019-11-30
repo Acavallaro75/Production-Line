@@ -5,10 +5,10 @@ import java.util.regex.Pattern;
 /**
  * The Employee class is used to create Employees that are allowed to create production of products.
  */
-public class Employee {
+class Employee {
 
   /** Field member "name" is the name of the employee. */
-  private StringBuilder name = new StringBuilder();
+  private final StringBuilder name = new StringBuilder();
 
   /**
    * Field member "userName" is the username of the employee. It is the first initial of their first
