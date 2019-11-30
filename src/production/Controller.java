@@ -1,5 +1,6 @@
 package production;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,6 +23,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -33,7 +36,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * when that choice is made the project fails to compile.
  *
  * @author Andrew Cavallaro
- * @date 11/26/2019
+ * @date 11/30/2019
  */
 public class Controller {
 
@@ -70,6 +73,12 @@ public class Controller {
   /** The column for product name which is generated from the database. */
   @FXML private TableColumn<?, ?> nameColumn;
 
+  /** The text field for the employee to enter their name. */
+  @FXML private TextField employeeName;
+
+  /** The text field for the employee to enter their password. */
+  @FXML private PasswordField password;
+
   /**
    * Field member "conn" is a Connection object that allows the program to connect to the database.
    */
@@ -97,19 +106,21 @@ public class Controller {
    * The iniatilizeDB() method is used to create a connection to the database. Field member "driver"
    * is used to establish what type of JDBC driver will be used. Field member "url" holds the
    * location of the database. Field member "user" holds the username to gain access to the
-   * database. Field member "pass" holds the password to gain entry to the database. Since there is
-   * no username, it is left blank. There will be bugs due to there being a hardcoded password. The
-   * getConnection() method uses the "url", "user", and "pass" field members for the Connection
-   * object.
+   * database. Field member "password" holds the password to gain entry to the database and is read
+   * from a file called properties. Since there is no username, it is left blank. There will be bugs
+   * due to there being a hardcoded password. The getConnection() method uses the "url", "user", and
+   * "pass" field members for the Connection object.
    */
   static void initializeDB() {
     try {
+      Properties properties = new Properties();
+      properties.load(new FileInputStream("production_resources/properties"));
+      final String password = properties.getProperty("PASSWORD");
       final String driver = "org.h2.Driver";
       final String url = "jdbc:h2:./production_resources/production";
       final String user = "";
-      final String pass = "password";
       Class.forName(driver);
-      conn = DriverManager.getConnection(url, user, pass);
+      conn = DriverManager.getConnection(url, user, password);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -417,5 +428,17 @@ public class Controller {
     Alert confirmation = new Alert(AlertType.CONFIRMATION);
     confirmation.setContentText("All production items have been successfully updated");
     confirmation.show();
+  }
+
+  @FXML
+  void createEmployee() {
+    if (employeeName.getText().equalsIgnoreCase("") || password.getText().equalsIgnoreCase("")) {
+      Alert error = new Alert(AlertType.ERROR);
+      error.setContentText("Please enter both fields");
+      error.show();
+    } else {
+      Employee employee = new Employee(employeeName.getText(), password.getText());
+      System.out.println(employee.toString());
+    }
   }
 }

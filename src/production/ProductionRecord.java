@@ -7,7 +7,7 @@ import java.util.Date;
  * The ProductionRecord class is mainly used to record production on the Produce tab.
  *
  * @author: Andrew Cavallaro
- * @date: 11/26/2019
+ * @date: 11/30/2019
  */
 class ProductionRecord {
 
@@ -41,7 +41,13 @@ class ProductionRecord {
     this.productID = productID;
     this.dateProduced = dateProduced;
     String padded = String.format("%05d", product.getID());
-    this.serialNumber = product.getManufacturer().substring(0, 3) + product.type.getCode() + padded;
+    if (product.getManufacturer().length() < 3) {
+      this.serialNumber =
+          product.getManufacturer().substring(0, 2) + product.type.getCode() + padded;
+    } else {
+      this.serialNumber =
+          product.getManufacturer().substring(0, 3) + product.type.getCode() + padded;
+    }
   }
 
   /**
