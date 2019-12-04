@@ -3,7 +3,7 @@
 ## Demonstration
 
 ## Documentation
-- https://acavallaro75.github.io/ProductionLine/index.html
+- JavaDoc: https://acavallaro75.github.io/ProductionLine/index.html
 
 ## Diagrams
 ##### Class Diagram:
