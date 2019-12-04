@@ -1,27 +1,27 @@
 # Product Line
 
-# Demonstration
+## Demonstration
 
-# Documentation
+## Documentation
 
-# Diagrams
+## Diagrams
 ##### Class Diagram:
 ![Class Diagram](src/diagrams/class_diagram.png)
 
 ##### Database Visualization:
 ![Database Diagram](src/diagrams/database_tables.png)
-# Getting Started
+## Getting Started
 
-# Built With
+## Built With
 
-# Contributing
+## Contributing
 
-# Author
+## Author
 
-# License
+## License
 
-# Acknowledgments
+## Acknowledgments
 
-# History
+## History
 
-# Key Programming Concepts Utilized
+## Key Programming Concepts Utilized
