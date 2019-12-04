@@ -5,7 +5,7 @@
   3. The system shall show all products in the database and will allow for either production of the product or the removal of the product from inventory at user discretion.
   4. The system shall allow for a username and password verification system that either approves or declines users based on password and username combinations.
   5. The system shall allow for new employees to be added to the system and access to the inventory tracking system.
-  6. The system shall create an audit trail for tracking what production employees create.
+  6. The system shall create an _audit trail_ for tracking what production employees create.
   
 - Production Line was created solely by Andrew Cavallaro as part of an Object-Oriented Programming class project. It was created initially during my Junior year of college at Florida Gulf Coast University in Fort Myers, Florida. The anticipated plan for the future of this project is to continue and add more functionality and perhaps features companies would like to implement that would fit their business needs.
 
