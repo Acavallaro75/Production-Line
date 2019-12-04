@@ -1,4 +1,11 @@
 # Product Line
+- Project description: Production Line is an inventory tracking system that warehouses would be able to implement into their business. It allows for the following functions:
+  1. The system shall allow for the creation of new products that will be available for distribution.
+  2. The system shall show production records for every product in inventory and will display the product's name, manufacturer, serial number, production number, and the date that the production was performed.
+  3. The system shall show all products in the database and will allow for either production of the product or the removal of the product from inventory at user discretion.
+  4. The system shall allow for a username and password verification system that either approves or declines users based on password and username combinations.
+  5. The system shall allow for new employees to be added to the system and access to the inventory tracking system.
+- Production Line was created solely by Andrew Cavallaro as part of an Object-Oriented Programming class project. It was created initially during my Junior year of college at Florida Gulf Coast University in Fort Myers, Florida. The anticipated plan for the future of this project is to continue and add more functionality and perhaps features companies would like to implement that would fit their business needs.
 
 ## Demonstration
 
