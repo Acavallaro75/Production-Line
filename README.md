@@ -10,6 +10,7 @@
 
 ##### Database Visualization:
 ![Database Diagram](src/diagrams/database_tables.png)
+
 ## Getting Started
 
 ## Built With
@@ -17,6 +18,7 @@
 ## Contributing
 
 ## Author
+- Andrew Cavallaro
 
 ## License
 
