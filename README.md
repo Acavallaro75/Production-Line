@@ -5,7 +5,7 @@
 # Documentation
 
 # Diagrams
-
+![Class Diagram](src/diagrams/class_diagram.png)
 # Getting Started
 
 # Built With
