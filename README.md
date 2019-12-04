@@ -5,7 +5,11 @@
 # Documentation
 
 # Diagrams
+Class Diagram:
 ![Class Diagram](src/diagrams/class_diagram.png)
+
+Database Diagram:
+![Database Diagram](src/diagrams/database_tables.png)
 # Getting Started
 
 # Built With
