@@ -1,4 +1,4 @@
-# Product Line
+# Production Line
 - Project description: Production Line is an inventory tracking system that warehouses would be able to implement into their business. It allows for the following functions:
   1. The system shall allow for the creation of new products that will be available for distribution.
   2. The system shall show production records for every product in inventory and will display the product's name, manufacturer, serial number, production number, and the date that the production was performed.
