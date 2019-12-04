@@ -31,6 +31,8 @@ public class ProductionLine extends Application {
   /**
    * This is the main method that launches any arguments being passed. Controller object
    * myController is used to initialize the database without having to press a button first.
+   *
+   * @param args arguments
    */
   public static void main(String[] args) {
     Controller.initializeDB();
