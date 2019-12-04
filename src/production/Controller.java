@@ -36,7 +36,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * when that choice is made the project fails to compile.
  *
  * @author Andrew Cavallaro
- * @date 11/30/2019
+ * @date 12/03/2019
  */
 public class Controller {
 
@@ -80,9 +80,10 @@ public class Controller {
   @FXML private PasswordField password;
 
   /**
-   * Field member "conn" is a Connection object that allows the program to connect to the database.
+   * Field member "connection" is a Connection object that allows the program to connect to the
+   * database.
    */
-  private static Connection conn;
+  private static Connection connection;
 
   /**
    * Field member "statement" is a Statement object that allows for data to be retrieved from the
@@ -120,7 +121,7 @@ public class Controller {
       final String url = "jdbc:h2:./production_resources/production";
       final String user = "";
       Class.forName(driver);
-      conn = DriverManager.getConnection(url, user, password);
+      connection = DriverManager.getConnection(url, user, password);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -160,12 +161,12 @@ public class Controller {
     for (int i = 1; i <= 10; i++) {
       numbers.add(i);
     }
-    ObservableList numberList = FXCollections.observableList(numbers);
+    ObservableList<Integer> numberList = FXCollections.observableList(numbers);
     quantityBox.getItems().clear();
     quantityBox.setItems(numberList);
     quantityBox.getSelectionModel().selectFirst();
     List<ItemType> productTypes = new ArrayList<>(Arrays.asList(ItemType.values()));
-    ObservableList typesList = FXCollections.observableList(productTypes);
+    ObservableList<ItemType> typesList = FXCollections.observableList(productTypes);
     productType.getItems().clear();
     productType.setItems(typesList);
     productType.getSelectionModel().selectFirst();
@@ -196,7 +197,7 @@ public class Controller {
   private void loadProductList() throws SQLException {
     produceList.setItems(productLine);
     String query = "SELECT * FROM PRODUCT";
-    statement = conn.createStatement();
+    statement = connection.createStatement();
     resultSet = statement.executeQuery(query);
     while (resultSet.next()) {
       if (resultSet.getString("Type").equalsIgnoreCase("AUDIO")) {
@@ -257,7 +258,7 @@ public class Controller {
         error.show();
       } else {
         String sql = "INSERT INTO Product (TYPE, MANUFACTURER, NAME) VALUES (?, ?, ?)";
-        preparedStatement = conn.prepareStatement(sql);
+        preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(
             1, productType.getSelectionModel().getSelectedItem().toString());
         preparedStatement.setString(2, manufacturerName.getText());
@@ -363,7 +364,7 @@ public class Controller {
     productLogView.clear();
     try {
       String sql = "SELECT * FROM PRODUCTIONRECORD";
-      statement = conn.createStatement();
+      statement = connection.createStatement();
       resultSet = statement.executeQuery(sql);
       while (resultSet.next()) {
         productLogView.appendText(
@@ -404,7 +405,7 @@ public class Controller {
       String sql =
           "INSERT INTO PRODUCTIONRECORD (PRODUCTION_NUMBER, PRODUCT_ID, SERIAL_NUMBER, "
               + "DATE_PRODUCED, NAME) VALUES (?, ?, ?, ?, ?)";
-      preparedStatement = conn.prepareStatement(sql);
+      preparedStatement = connection.prepareStatement(sql);
       preparedStatement.setInt(1, productionRecord[0].getProductionNumber());
       preparedStatement.setInt(2, product.getID());
       preparedStatement.setString(3, productionRecord[0].getSerialNumber());
@@ -430,15 +431,59 @@ public class Controller {
     confirmation.show();
   }
 
+  /**
+   * The createEmployee() method creates a new employee and enters the associated data into the
+   * database. The "name", "username", "password", and "email" fields are entered into the database
+   * and are generated from the employee class.
+   *
+   * @throws SQLException yes, it does
+   */
   @FXML
-  void createEmployee() {
+  void createEmployee() throws SQLException {
     if (employeeName.getText().equalsIgnoreCase("") || password.getText().equalsIgnoreCase("")) {
       Alert error = new Alert(AlertType.ERROR);
       error.setContentText("Please enter both fields");
       error.show();
     } else {
       Employee employee = new Employee(employeeName.getText(), password.getText());
-      System.out.println(employee.toString());
+      employee.reverseString(employee.getPassword());
+      String sql = "INSERT INTO EMPLOYEES (NAME, USERNAME, PASSWORD, EMAIL) VALUES (?, ?, ?, ?)";
+      preparedStatement = connection.prepareStatement(sql);
+      preparedStatement.setString(1, String.valueOf(employee.getName()));
+      preparedStatement.setString(2, employee.getUserName());
+      preparedStatement.setString(3, employee.getPassword());
+      preparedStatement.setString(4, employee.getEmail());
+      preparedStatement.executeUpdate();
+      preparedStatement.close();
     }
+  }
+
+  /**
+   * The checkEmployee() method compares the values of the entered data to what it is in the
+   * database. If it matches, the user is logged in. If it does not match, the user is given an
+   * error message.
+   *
+   * @param userName username of the employee
+   * @param password password of the employee
+   * @return true or false depending on if it matches the database values
+   */
+  boolean checkEmployee(String userName, String password) {
+    try {
+      if (userName != null && password != null) {
+        String getCredentials = "SELECT PASSWORD FROM EMPLOYEES WHERE USERNAME = ?";
+        preparedStatement = connection.prepareStatement(getCredentials);
+        preparedStatement.setString(1, userName);
+        resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+          if (resultSet.getString("PASSWORD") != null
+              && resultSet.getString("PASSWORD").equals(password)) {
+            return true;
+          }
+        }
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return false;
   }
 }

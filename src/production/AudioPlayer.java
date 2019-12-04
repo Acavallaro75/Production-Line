@@ -7,7 +7,7 @@ package production;
  * up audio devices in the database.
  *
  * @author: Andrew Cavallaro
- * @date: 11/30/2019
+ * @date: 12/03/2019
  */
 public class AudioPlayer extends Product implements MultimediaControl {
 

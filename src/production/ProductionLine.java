@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  * subclass that extends the superclass Application and derives its methods and fields.
  *
  * @author Andrew Cavallaro
- * @date 11/30/2019
+ * @date 12/03/2019
  */
 public class ProductionLine extends Application {
 
@@ -22,7 +22,7 @@ public class ProductionLine extends Application {
    */
   @Override
   public void start(Stage production) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("production_line.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("employee_login.fxml"));
     production.setTitle("Product Tracking System");
     production.setScene(new Scene(root, 550, 500));
     production.show();

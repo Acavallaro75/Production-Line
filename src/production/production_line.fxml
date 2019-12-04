@@ -8,16 +8,16 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-
+<?import javafx.scene.text.Font?>
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.221"
   xmlns:fx="http://javafx.com/fxml/1" fx:controller="production.Controller">
   <columnConstraints>
@@ -101,6 +101,15 @@
             GridPane.rowIndex="1"/>
           <Label text="Password" textFill="WHITE" GridPane.rowIndex="1"/>
         </GridPane>
+        <Label layoutX="206.0" layoutY="115.0" text="Add Employee" textFill="WHITE"
+          underline="true">
+          <font>
+            <Font name="System Bold" size="24.0"/>
+          </font>
+        </Label>
+        <Label layoutX="58.0" layoutY="439.0"
+          text="Note: username will be first initial of first name and entire last name, all lowercase."
+          textFill="WHITE"/>
       </AnchorPane>
     </Tab>
   </TabPane>

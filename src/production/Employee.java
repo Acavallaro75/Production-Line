@@ -4,6 +4,9 @@ import java.util.regex.Pattern;
 
 /**
  * The Employee class is used to create Employees that are allowed to create production of products.
+ *
+ * @author: Andrew Cavallaro
+ * @date: 12/03/2019
  */
 class Employee {
 
@@ -45,6 +48,42 @@ class Employee {
   }
 
   /**
+   * The getName() method is used to obtain the employee's name.
+   *
+   * @return the employee's name
+   */
+  public StringBuilder getName() {
+    return name;
+  }
+
+  /**
+   * The getUserName() method is used to obtain the employee's username.
+   *
+   * @return the employee's username
+   */
+  public String getUserName() {
+    return userName.toLowerCase();
+  }
+
+  /**
+   * The getPassword() method is used to obtain the employee's password.
+   *
+   * @return the employee's password
+   */
+  public String getPassword() {
+    return password;
+  }
+
+  /**
+   * The getEmail() method is used to obtain the employee's email.
+   *
+   * @return the employee's email
+   */
+  public String getEmail() {
+    return email;
+  }
+
+  /**
    * The setUserName() method sets the employee's username. It is called by the checkName() method
    * and passes the "userName" value. If the passed value is "default", the "userName" is set to
    * default. Else, it will take the first initial of the passed value and the entire last name and
@@ -81,6 +120,14 @@ class Employee {
     }
   }
 
+  /**
+   * The checkName() method is used to check the name of the employee. If it contains a space, it
+   * calls the setUserName() and setEmail() methods and passes in the name argument. If there is no
+   * space in the name, the setUserName() and setEmail() methods are called and passed "Default" and
+   * "user@oracleacademy.Test".
+   *
+   * @param name the employee's name
+   */
   private void checkName(String name) {
     if (name.contains(" ")) {
       setUserName(name);
@@ -88,6 +135,20 @@ class Employee {
     } else {
       setUserName("Default");
       setEmail("user@oracleacademy.Test");
+    }
+  }
+
+  /**
+   * The reverseString() method takes the employee's password and reverses it.
+   *
+   * @param password employee's password
+   * @return the employee's password reversed
+   */
+  public String reverseString(String password) {
+    if (password.isEmpty()) {
+      return "";
+    } else {
+      return this.password = reverseString(password.substring(1)) + password.charAt(0);
     }
   }
 
@@ -103,7 +164,7 @@ class Employee {
     final String passwordVerification = "^(.*[a-z])(.*[A-Z])(.*[@#!$%^&+=])$";
     final Pattern pattern = Pattern.compile(passwordVerification);
     if (pattern.matcher(password).matches()) {
-      this.password = password;
+      reverseString(password);
     } else {
       this.password = "pw";
     }

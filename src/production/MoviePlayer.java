@@ -7,7 +7,7 @@ package production;
  * in the database.
  *
  * @author: Andrew Cavallaro
- * @date: 11/30/2019
+ * @date: 12/03/2019
  */
 public class MoviePlayer extends Product implements MultimediaControl {
 

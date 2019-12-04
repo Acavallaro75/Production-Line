@@ -7,7 +7,7 @@ import java.util.Date;
  * The ProductionRecord class is mainly used to record production on the Produce tab.
  *
  * @author: Andrew Cavallaro
- * @date: 11/30/2019
+ * @date: 12/03/2019
  */
 class ProductionRecord {
 
