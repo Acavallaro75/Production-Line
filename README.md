@@ -5,10 +5,10 @@
 # Documentation
 
 # Diagrams
-###Class Diagram:
+##### Class Diagram:
 ![Class Diagram](src/diagrams/class_diagram.png)
 
-###Database Visualization:
+##### Database Visualization:
 ![Database Diagram](src/diagrams/database_tables.png)
 # Getting Started
 
