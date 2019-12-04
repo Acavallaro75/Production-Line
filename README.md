@@ -11,7 +11,7 @@
 ## Demonstration
 
 ## Documentation
-- [JavaDoc](https://acavallaro75.github.io/ProductionLine/index.html)
+- Please use the following link to view the [JavaDoc](https://acavallaro75.github.io/ProductionLine/index.html) for this project.
 
 ## Diagrams
 ##### Class Diagram:
