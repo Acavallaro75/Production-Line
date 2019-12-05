@@ -89,4 +89,6 @@ SOFTWARE.
 
 ## History
 
+Production Line is in it's beginning stages and will be updated periodically over time. Check here for project updates and see how the project has evolved over time. Currently, see project description for the initial history of Production Line.
+
 ## Key Programming Concepts Utilized
