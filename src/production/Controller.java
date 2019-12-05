@@ -257,7 +257,7 @@ public class Controller {
         error.setContentText("Please fill out all fields before entering.");
         error.show();
       } else {
-        String sql = "INSERT INTO Product (TYPE, MANUFACTURER, NAME) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO PRODUCT (TYPE, MANUFACTURER, NAME) VALUES (?, ?, ?)";
         preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(
             1, productType.getSelectionModel().getSelectedItem().toString());
@@ -485,5 +485,52 @@ public class Controller {
       e.printStackTrace();
     }
     return false;
+  }
+
+  @FXML
+  private void removeProduct() {
+    try {
+      if (tableViewProducts.getSelectionModel().getSelectedItem() == null) {
+        Alert error = new Alert(AlertType.ERROR);
+        error.setHeaderText("Error");
+        error.setContentText("Please select a product to remove from the database.");
+        error.show();
+      } else {
+        Alert confirmation = new Alert(AlertType.CONFIRMATION);
+        confirmation.setContentText(
+            "Confirm removal of "
+                + tableViewProducts.getSelectionModel().getSelectedItem().getManufacturer()
+                + " "
+                + tableViewProducts.getSelectionModel().getSelectedItem().getName()
+                + "?");
+        Optional<ButtonType> result = confirmation.showAndWait();
+        ButtonType button = result.orElse(ButtonType.CANCEL);
+        if (button == ButtonType.OK) {
+          String remove =
+              "DELETE FROM PRODUCT WHERE ID = ? AND TYPE = ? AND MANUFACTURER = ? AND NAME = ?";
+          preparedStatement = connection.prepareStatement(remove);
+          preparedStatement.setInt(
+              1, tableViewProducts.getSelectionModel().getSelectedItem().getID());
+          preparedStatement.setString(
+              2, String.valueOf(tableViewProducts.getSelectionModel().getSelectedItem().getType()));
+          preparedStatement.setString(
+              3, tableViewProducts.getSelectionModel().getSelectedItem().getManufacturer());
+          preparedStatement.setString(
+              4, tableViewProducts.getSelectionModel().getSelectedItem().getName());
+          preparedStatement.executeUpdate();
+          preparedStatement.close();
+          initialize();
+        } else {
+          confirmation.setContentText(
+              "Cancelled removal of "
+                  + tableViewProducts.getSelectionModel().getSelectedItem().getManufacturer()
+                  + " "
+                  + tableViewProducts.getSelectionModel().getSelectedItem().getName());
+          confirmation.show();
+        }
+      }
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
   }
 }
