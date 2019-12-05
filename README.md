@@ -27,6 +27,22 @@ Please use the following link to view the [JavaDoc](https://acavallaro75.github.
 
 ## Getting Started
 
+- On the [home page](https://github.com/Acavallaro75/ProductionLine) of the Sandy Shores resort, select the clone or download drop-down menu and copy the URL displayed in that menu. Alternatively, the link is here for your convenience: https://github.com/Acavallaro75/ProductionLine.git.
+
+- Once the link has been copied, open your Java IDE, preferably IntilliJ IDEA Ultimate Edition by JetBrains as that was what was used to produce the project, and select "Get from Version Control".
+
+- Paste the copied URL into the field URL and choose where you would like to save this project and select clone.
+
+- You will be prompted with a message asking if you would like to open the project. Select yes to view the project.
+
+- A runnable jar file has been made, so you should only need to go to the ProductionLine class in the production package and press run to access the program.
+
+- On the left side of the ProductionLine class select the green triangle and select "Run 'ProductionLine.main()'" and the program should run.
+
+- The database also has been implemented with a jar file, so that should aslo work with no problems.
+
+- For initial running purposes, use admin and password for the username and password fields, respectively.
+
 ## Built With
 
 - The integrated development environment (IDE) used for this project was IntelliJ IDEA Ultimate Edition. The Java Development Kit (JDK) is Java 8.1.221.
