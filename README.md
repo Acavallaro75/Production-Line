@@ -37,7 +37,7 @@
 
 ## Contributing
 
-- If anyone would like to contribute, give feedback, or would like more information, feel free to email me at [andrew.cavallarojr@gmail.com](andrew.cavallarojr@gmail.com).
+- If anyone would like to contribute, give feedback, or would like more information, feel free to email me at [andrew.cavallarojr@gmail.com].
 
 ## Author
 - Andrew Cavallaro
