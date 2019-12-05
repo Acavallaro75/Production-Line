@@ -1,4 +1,5 @@
 # Production Line
+
 - Project description: Production Line is an inventory tracking system that warehouses and other large companies would be able to implement into their business. It allows for the following functions:
   1. The system shall allow for the creation of new products that will be available for distribution.
   2. The system shall show production records for every product in inventory and will display the product's name, manufacturer, serial number, production number, and the date that the production was performed.
@@ -12,18 +13,22 @@
 ## Demonstration
 
 ## Documentation
+
 - Please use the following link to view the [JavaDoc](https://acavallaro75.github.io/ProductionLine/index.html) for this project.
 
 ## Diagrams
 ##### Class Diagram:
+
 ![Class Diagram](src/diagrams/class_diagram.png)
 
 ##### Database Visualization:
+
 ![Database Diagram](src/diagrams/database_tables.png)
 
 ## Getting Started
 
 ## Built With
+
 - The integrated development environment (IDE) used for this project was IntelliJ IDEA Ultimate Edition. The Java Development Kit (JDK) is Java 8.1.221.
 
 - The database that is implemented in this project is an H2 database. The database contains three tables: employees, product, and production record. The employee database tracks employee's names, usernames, emails, and passwords and is used to verify login information to allow access to the program. The product database tracks the product's ID number, name, type, and manufacturer. The production record database tracks production of the products in the product database and has the following columns: production number, product ID, serial number, and date produced.
