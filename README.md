@@ -94,3 +94,8 @@ SOFTWARE.
 Production Line is in it's beginning stages and will be updated periodically over time. Check here for project updates and see how the project has evolved over time. Currently, see project description for the initial history of Production Line.
 
 ## Key Programming Concepts Utilized
+
+- Enums: a special "class" that represents a group of constants
+  - There are two enums in Production Line:
+    - Item Type
+    - Monitor Type
