@@ -95,7 +95,61 @@ Production Line is in it's beginning stages and will be updated periodically ove
 
 ## Key Programming Concepts Utilized
 
-- Enums: a special "class" that represents a group of constants
+#### Enums
+
+- A special "class" that represents a group of constants
   - There are two enums in Production Line:
-    - Item Type
-    - Monitor Type
+    - Item Type: contains the types of items that can be stored into production and their associated codes
+    - Monitor Type: contains the two types of monitors for visual products
+
+#### Inheritance
+
+- A mechanism in which a child object acquires all the properties and behaviors of a parent object
+  - There are two instances of inheritance in Production Line:
+    - The AudioPlayer class extends (inherits) the Product class
+    - The MoviePlayer class extends (inherits) the Product class
+
+#### Interfaces
+
+- A Java construct that helps define the roles that an object must assume
+  - There are three interfaces and four classes that implement them in Production Line:
+    - The Product class implements the Item interface
+    - The MoviePlayer class implements the MultimediaControl interface
+    - The AudioPlayer class implements the MultimediaControl interface
+    - The Screen class implements the ScreenSpec interface
+
+#### JDBC and SQL
+
+- Products, employees, and production records are all stored into the H2 database via JDBC and SQL statements.
+- Connection, Statement, PreparedStatement, and ResultSet objects are all used in this process.
+- The database is secured via a remote password stored in a read-only text file.
+
+#### Exceptions and Assertions
+
+- Exception: an event, which occurs during the execution of a program, that disrupts the normal flow of the program's instructions
+- Error handling has been implemented to prevent wrongful entry of Products into the database.
+- Try and catch clauses are used throughout for SQL error handling
+
+#### Collections
+
+- A framework that provides an architecture to store and manipulate the group of objects
+  - The following Collections are used in Production Line:
+    - Array lists
+    - Lists
+    - Observable lists
+
+#### Regular Expressions (Regex)
+
+- Regular expressions is used for searching, manipulating and editing a string.
+- Password verification for Production Line is achieved through the power of Regex.
+- Passwords must contain at a minimum one upper-case letter, one lower-case letter, and a special character.
+
+#### Recursion
+
+- A process in which a method calls itself continuously until it reaches a base class
+- Recursion is used in Production Line for storing passwords to the H2 database.
+- The original password is stored as a reverse copy of itself and when checked in the database is reverted back to it's original state to verify matching values.
+
+#### Lambdas
+
+- A function which can be created without belonging to any class, can be passed around as if it were an object and executed on demand
