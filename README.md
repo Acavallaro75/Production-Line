@@ -12,6 +12,8 @@ Production Line was created solely by Andrew Cavallaro as part of an Object-Orie
 
 ## Demonstration
 
+![Production Line](src/images/xt9vKgkhPF.gif)
+
 ## Documentation
 
 Please use the following link to view the [JavaDoc](https://acavallaro75.github.io/ProductionLine/index.html) for this project.
