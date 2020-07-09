@@ -29,7 +29,7 @@ Please use the following link to view the [JavaDoc](https://acavallaro75.github.
 
 ## Getting Started
 
-- On the [home page](https://github.com/Acavallaro75/ProductionLine) of the Sandy Shores resort, select the clone or download drop-down menu and copy the URL displayed in that menu. Alternatively, the link is here for your convenience: https://github.com/Acavallaro75/ProductionLine.git.
+- On the [home page](https://github.com/Acavallaro75/ProductionLine) of the Production Line GitHub page, select the clone or download drop-down menu and copy the URL displayed in that menu. Alternatively, the link is here for your convenience: https://github.com/Acavallaro75/ProductionLine.git.
 
 - Once the link has been copied, open your Java IDE, preferably IntilliJ IDEA Ultimate Edition by JetBrains as that was what was used to produce the project, and select "Get from Version Control".
 
