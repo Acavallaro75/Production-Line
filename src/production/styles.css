@@ -11,7 +11,7 @@
 * been changed to #383838.
  */
 #root {
-  -fx-background-color: #383838;
+    -fx-background-color: #383838;
 }
 
 /*
@@ -19,7 +19,7 @@
 * made into a dark color, so the text must be white in order to be read.
  */
 #name, #manufacturer, #type, #quantity {
-  -fx-text-fill: white;
+    -fx-text-fill: white;
 }
 
 /*
@@ -27,27 +27,27 @@
 * changed as well as adding size to the button layout.
  */
 #myButton {
-  -fx-background-color: #090a0c,
-  linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
-  linear-gradient(#20262b, #191d22),
-  radial-gradient(center 50% 0%, radius 100%, rgba(114, 131, 148, 0.9), rgba(255, 255, 255, 0));
-  -fx-background-radius: 5, 4, 3, 5;
-  -fx-background-insets: 0, 1, 2, 0;
-  -fx-text-fill: white;
-  -fx-effect: dropShadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
-  -fx-font-family: "Arial";
-  -fx-font-size: 12px;
-  -fx-padding: 10 20 10 20;
+    -fx-background-color: #090a0c,
+    linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+    linear-gradient(#20262b, #191d22),
+    radial-gradient(center 50% 0%, radius 100%, rgba(114, 131, 148, 0.9), rgba(255, 255, 255, 0));
+    -fx-background-radius: 5, 4, 3, 5;
+    -fx-background-insets: 0, 1, 2, 0;
+    -fx-text-fill: white;
+    -fx-effect: dropShadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+    -fx-font-family: "Arial";
+    -fx-font-size: 12px;
+    -fx-padding: 10 20 10 20;
 }
 
 /*
 * This is the CSS for when the user hovers over a button. The background slightly changes color.
  */
 #myButton:hover {
-  -fx-background-color: #090a0c,
-  linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
-  linear-gradient(#20262b, #191d22),
-  radial-gradient(center 50% 50%, radius 100%, rgba(1, 125, 148, 0.9), rgba(255, 255, 255, 0));
+    -fx-background-color: #090a0c,
+    linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+    linear-gradient(#20262b, #191d22),
+    radial-gradient(center 50% 50%, radius 100%, rgba(1, 125, 148, 0.9), rgba(255, 255, 255, 0));
 }
 
 /*
@@ -55,6 +55,6 @@
 * to indicate that the button has been pressed.
  */
 #myButton:pressed {
-  -fx-padding: 10 10 10 10;
-  -fx-background-insets: 2 0 0 0, 2 0 3 0, 2 0 4 0, 2 0 5 0;
+    -fx-padding: 10 10 10 10;
+    -fx-background-insets: 2 0 0 0, 2 0 3 0, 2 0 4 0, 2 0 5 0;
 }
